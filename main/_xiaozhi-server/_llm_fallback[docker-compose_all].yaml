@@ -1,0 +1,127 @@
+# Docker安装全模块
+
+version: '3'
+services:
+  # Server模块
+  xiaozhi-esp32-server:
+    image: ghcr.nju.edu.cn/xinnan-tech/xiaozhi-esp32-server:server_latest
+    container_name: xiaozhi-esp32-server
+    depends_on:
+      - xiaozhi-esp32-server-db
+      - xiaozhi-esp32-server-redis
+    restart: always
+    networks:
+      - default
+    ports:
+      # ws服务端
+      - "8000:8000"
+      # http服务的端口，用于视觉分析接口
+      - "8003:8003"
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      - TZ=Asia/Bangkok
+      - GOOGLE_MAPS_API_KEY=AIzaSyCiwPDPNc6T101SZO72hfYRlj0OZud1Ky4
+      - GOOGLE_CALENDAR_ID=atty.dhamanoon@gmail.com
+    volumes:
+      # 配置文件目录
+      - ./data:/opt/xiaozhi-esp32-server/data
+      # 模型文件挂接，很重要
+      - ./models/SenseVoiceSmall/model.pt:/opt/xiaozhi-esp32-server/models/SenseVoiceSmall/model.pt
+      # TTS/ASR cache in RAM (tmpfs) - faster + saves SSD wear
+      # Custom weather plugin (Open-Meteo, no API key) overrides built-in QWeather one
+      - ./custom/get_weather.py:/opt/xiaozhi-esp32-server/plugins_func/functions/get_weather.py:ro
+      # Patched openai ASR provider: adds language hint support (e.g. th) to fix wrong-language STT
+      - ./custom/asr_openai.py:/opt/xiaozhi-esp32-server/core/providers/asr/openai.py:ro
+      # Google Cloud STT provider (phrase-hints for Thai proper nouns)
+      - ./custom/asr_google.py:/opt/xiaozhi-esp32-server/core/providers/asr/google.py:ro
+      # Thai news plugin (Thairath/Matichon/Blognone RSS)
+      - ./custom/get_news_from_thai.py:/opt/xiaozhi-esp32-server/plugins_func/functions/get_news_from_thai.py:ro
+      # Google Cloud TTS provider (REST, service-account auth)
+      - ./custom/google.py:/opt/xiaozhi-esp32-server/core/providers/tts/google.py:ro
+      # MiniMax global (.io) TTS provider — cloned voice + language_boost Thai
+      - ./custom/minimax_io.py:/opt/xiaozhi-esp32-server/core/providers/tts/minimax_io.py:ro
+      # Google Maps directions plugin
+      - ./custom/get_directions.py:/opt/xiaozhi-esp32-server/plugins_func/functions/get_directions.py:ro
+      # Patched plugin_executor: adds get_directions to necessary_functions
+      - ./custom/plugin_executor.py:/opt/xiaozhi-esp32-server/core/providers/tools/server_plugins/plugin_executor.py:ro
+      # Google Calendar plugin (service account, shared calendar)
+      - ./custom/get_calendar.py:/opt/xiaozhi-esp32-server/plugins_func/functions/get_calendar.py:ro
+      - ./custom/search_knowledge.py:/opt/xiaozhi-esp32-server/plugins_func/functions/search_knowledge.py:ro
+      - ./custom/handle_exit_intent.py:/opt/xiaozhi-esp32-server/plugins_func/functions/handle_exit_intent.py:ro
+      - ./custom/get_current_time.py:/opt/xiaozhi-esp32-server/plugins_func/functions/get_current_time.py:ro
+      # LLM multi-tier fallback provider (Gemini 3.5 -> 2.5), chain @ data/llm_fallback.yaml
+      - ./custom/fallback/fallback.py:/opt/xiaozhi-esp32-server/core/providers/llm/fallback/fallback.py:ro
+      - ./custom/fallback/__init__.py:/opt/xiaozhi-esp32-server/core/providers/llm/fallback/__init__.py:ro
+      - type: tmpfs
+        target: /opt/xiaozhi-esp32-server/tmp
+        tmpfs:
+          size: 536870912
+
+  # manager-api和manager-web模块
+  xiaozhi-esp32-server-web:
+    image: ghcr.nju.edu.cn/xinnan-tech/xiaozhi-esp32-server:web_latest
+    container_name: xiaozhi-esp32-server-web
+    restart: always
+    networks:
+      - default
+    depends_on:
+      xiaozhi-esp32-server-db:
+        condition: service_healthy
+      xiaozhi-esp32-server-redis:
+        condition: service_healthy
+    ports:
+      # 智控台
+      - "8002:8002"
+    environment:
+      - TZ=Asia/Bangkok
+      - GOOGLE_MAPS_API_KEY=AIzaSyCiwPDPNc6T101SZO72hfYRlj0OZud1Ky4
+      - GOOGLE_CALENDAR_ID=atty.dhamanoon@gmail.com
+      - SPRING_DATASOURCE_DRUID_URL=jdbc:mysql://xiaozhi-esp32-server-db:3306/xiaozhi_esp32_server?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true&connectTimeout=30000&socketTimeout=30000&autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+      - SPRING_DATASOURCE_DRUID_USERNAME=root
+      - SPRING_DATASOURCE_DRUID_PASSWORD=47afd899679046b7841f98b12a35352ccf99c5a828f2033e
+      - SPRING_DATA_REDIS_HOST=xiaozhi-esp32-server-redis
+      - SPRING_DATA_REDIS_PASSWORD=
+      - SPRING_DATA_REDIS_PORT=6379
+    volumes:
+      # 配置文件目录
+      - ./uploadfile:/uploadfile
+  # 数据库模块
+  xiaozhi-esp32-server-db:
+    image: mysql:latest
+    container_name: xiaozhi-esp32-server-db
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 45s
+      interval: 10s
+      retries: 10
+    restart: always
+    networks:
+      - default
+    expose:
+      - 3306
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    environment:
+      - TZ=Asia/Bangkok
+      - GOOGLE_MAPS_API_KEY=AIzaSyCiwPDPNc6T101SZO72hfYRlj0OZud1Ky4
+      - GOOGLE_CALENDAR_ID=atty.dhamanoon@gmail.com
+      - MYSQL_ROOT_PASSWORD=47afd899679046b7841f98b12a35352ccf99c5a828f2033e
+      - MYSQL_DATABASE=xiaozhi_esp32_server
+      - MYSQL_INITDB_ARGS="--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
+  # redis模块
+  xiaozhi-esp32-server-redis:
+    image: redis:8.0
+    expose:
+      - 6379
+    container_name: xiaozhi-esp32-server-redis
+    restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - default
+networks:
+  default:

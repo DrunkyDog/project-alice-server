@@ -1,0 +1,122 @@
+import os
+import json
+import uuid
+import base64
+import asyncio
+from datetime import datetime
+
+import requests
+from google.oauth2 import service_account
+from google.auth.transport.requests import Request as GoogleAuthRequest
+
+from core.providers.tts.base import TTSProviderBase
+
+TTS_ENDPOINT = "https://texttospeech.googleapis.com/v1/text:synthesize"
+SCOPE = "https://www.googleapis.com/auth/cloud-platform"
+
+
+class TTSProvider(TTSProviderBase):
+    """
+    Google Cloud Text-to-Speech (REST API, service-account auth).
+
+    NON_STREAM: synthesizes a full audio file, then the base class converts it to
+    Opus for the device — avoiding the streaming/opus issues seen with Minimax.
+
+    Auth (เลือกอย่างใดอย่างหนึ่ง):
+      api_key          : Google Cloud API key — ง่ายสุด กรอกใน WebUI ได้เลย (แนะนำ)
+      credentials_path : path ของ service-account JSON ที่ mount ไว้ (ทางเลือกเดิม)
+      ถ้ามีทั้งคู่ → api_key ชนะ
+
+    config keys:
+      voice            : full Google voice name, e.g. "th-TH-Neural2-C"
+      private_voice    : overrides `voice` (per-agent custom voice)
+      language_code    : BCP-47, default "th-TH"
+      format           : "mp3" (default) or "wav"
+      speaking_rate    : 0.25–4.0, default 1.0
+      pitch            : -20.0–20.0 semitones, default 0.0
+    """
+
+    def __init__(self, config, delete_audio_file):
+        super().__init__(config, delete_audio_file)
+
+        # โหมด auth: api_key (แนะนำ, กรอกใน WebUI) หรือ service-account (credentials_path)
+        self.api_key = config.get("api_key") or None
+        self.credentials_path = (
+            config.get("credentials_path") or config.get("credentials_file")
+        )
+        self._credentials = None
+        if self.api_key:
+            pass  # ใช้ API key ผ่าน header X-Goog-Api-Key — ไม่ต้องมี service-account
+        elif self.credentials_path and os.path.exists(self.credentials_path):
+            self._credentials = service_account.Credentials.from_service_account_file(
+                self.credentials_path, scopes=[SCOPE]
+            )
+        else:
+            raise Exception(
+                "Google TTS: ต้องกรอก api_key หรือระบุ service-account file (credentials_path) อย่างใดอย่างหนึ่ง"
+            )
+
+        # voice: private_voice (per-agent) wins over the model default
+        self.voice = config.get("private_voice") or config.get("voice") or "th-TH-Neural2-C"
+        self.language_code = config.get("language_code") or "th-TH"
+
+        self.audio_file_type = (config.get("format") or "mp3").lower()
+
+        rate = config.get("speaking_rate", config.get("rate"))
+        self.speaking_rate = float(rate) if rate not in (None, "") else 1.0
+        pitch = config.get("pitch")
+        self.pitch = float(pitch) if pitch not in (None, "") else 0.0
+
+    def generate_filename(self, extension=None):
+        ext = extension or f".{self.audio_file_type}"
+        return os.path.join(
+            self.output_file,
+            f"tts-{datetime.now().date()}@{uuid.uuid4().hex}{ext}",
+        )
+
+    def _get_token(self):
+        # google-auth caches the token and only hits the network when expired
+        if not self._credentials.valid:
+            self._credentials.refresh(GoogleAuthRequest())
+        return self._credentials.token
+
+    def _synthesize_blocking(self, text):
+        encoding = "LINEAR16" if self.audio_file_type == "wav" else "MP3"
+        payload = {
+            "input": {"text": text},
+            "voice": {"languageCode": self.language_code, "name": self.voice},
+            "audioConfig": {
+                "audioEncoding": encoding,
+                "speakingRate": self.speaking_rate,
+                "pitch": self.pitch,
+            },
+        }
+        headers = {"Content-Type": "application/json; charset=utf-8"}
+        if self.api_key:
+            headers["X-Goog-Api-Key"] = self.api_key
+        else:
+            headers["Authorization"] = f"Bearer {self._get_token()}"
+        resp = requests.post(
+            TTS_ENDPOINT,
+            headers=headers,
+            data=json.dumps(payload),
+            timeout=self.tts_timeout,
+        )
+        if resp.status_code != 200:
+            raise Exception(
+                f"Google TTS request failed: {resp.status_code}, {resp.text[:300]}"
+            )
+        audio_content = resp.json().get("audioContent")
+        if not audio_content:
+            raise Exception("Google TTS returned empty audioContent")
+        return base64.b64decode(audio_content)
+
+    async def text_to_speak(self, text, output_file):
+        # run blocking HTTP + token refresh off the event loop
+        audio_bytes = await asyncio.to_thread(self._synthesize_blocking, text)
+        if output_file:
+            os.makedirs(os.path.dirname(output_file), exist_ok=True)
+            with open(output_file, "wb") as f:
+                f.write(audio_bytes)
+        else:
+            return audio_bytes

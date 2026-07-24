@@ -1,0 +1,390 @@
+[226M]  .
+├── [ 70K]  backup_DBbeforeFallback_20260722_180101.sql
+├── [2.4K]  backup_LLM_ClaudeHaiku_20260722.sql
+├── [4.2K]  cloudflared
+│   └── [ 240]  tunnel-token.txt
+├── [196K]  compose-up.log
+├── [157K]  custom
+│   ├── [5.8K]  asr_google.py
+│   ├── [2.5K]  asr_openai.py
+│   ├── [ 31K]  fallback
+│   │   ├── [ 10K]  fallback.py
+│   │   ├── [   0]  __init__.py
+│   │   └── [ 17K]  __pycache__
+│   │       └── [ 13K]  fallback.cpython-312.pyc
+│   ├── [ 10K]  get_calendar.py
+│   ├── [4.3K]  get_current_time.py
+│   ├── [4.4K]  get_directions.py
+│   ├── [ 11K]  get_news_from_thai.py
+│   ├── [ 13K]  get_weather.py
+│   ├── [5.1K]  google.py
+│   ├── [4.2K]  google.py.orig
+│   ├── [3.9K]  handle_exit_intent.py
+│   ├── [5.8K]  minimax_io.py
+│   ├── [4.6K]  minimax_io.py.bak-20260722_131316
+│   ├── [4.6K]  plugin_executor.py
+│   ├── [ 20K]  __pycache__
+│   │   ├── [8.2K]  asr_google.cpython-312.pyc
+│   │   └── [7.9K]  minimax_io.cpython-312.pyc
+│   ├── [6.2K]  search_knowledge.py
+│   ├── [2.7K]  set_gateway.py
+│   ├── [8.3K]  sync_fallback.py
+│   └── [5.0K]  wire_alice_edge.py
+├── [ 13K]  data
+│   ├── [2.1K]  .config.yaml
+│   ├── [1.8K]  .config.yaml.bak-20260723_034804
+│   ├── [2.3K]  google-tts-sa.json
+│   ├── [ 728]  llm_fallback.yaml
+│   ├── [ 328]  llm_fallback.yaml.bak.2026-07-26-1429
+│   ├── [1.8K]  llm_fallback.yaml.bak-pre-aigw
+│   └── [ 188]  .wakeup_words.yaml
+├── [ 175]  .db-credentials
+├── [5.4K]  docker-compose_all.yml
+├── [2.8K]  docker-compose_all.yml.bak
+├── [4.6K]  docker-compose_all.yml.bak-20260722_120738
+├── [4.8K]  docker-compose_all.yml.bak-20260722_180002
+├── [5.1K]  docker-compose_all.yml.bak-20260723_034804
+├── [5.2K]  docker-compose_all.yml.bak-20260723_044647
+├── [5.6K]  docker-compose_edit_2026-07-27.yml
+├── [255K]  .git
+│   ├── [4.0K]  branches
+│   ├── [ 614]  COMMIT_EDITMSG
+│   ├── [ 151]  config
+│   ├── [  73]  description
+│   ├── [  23]  HEAD
+│   ├── [ 29K]  hooks
+│   │   ├── [ 478]  applypatch-msg.sample
+│   │   ├── [ 896]  commit-msg.sample
+│   │   ├── [4.6K]  fsmonitor-watchman.sample
+│   │   ├── [ 189]  post-update.sample
+│   │   ├── [ 424]  pre-applypatch.sample
+│   │   ├── [1.6K]  pre-commit.sample
+│   │   ├── [ 416]  pre-merge-commit.sample
+│   │   ├── [1.5K]  prepare-commit-msg.sample
+│   │   ├── [1.3K]  pre-push.sample
+│   │   ├── [4.8K]  pre-rebase.sample
+│   │   ├── [ 544]  pre-receive.sample
+│   │   ├── [2.7K]  push-to-checkout.sample
+│   │   ├── [2.3K]  sendemail-validate.sample
+│   │   └── [3.6K]  update.sample
+│   ├── [1.5K]  index
+│   ├── [4.2K]  info
+│   │   └── [ 240]  exclude
+│   ├── [ 13K]  logs
+│   │   ├── [ 609]  HEAD
+│   │   └── [8.6K]  refs
+│   │       └── [4.6K]  heads
+│   │           └── [ 609]  master
+│   ├── [186K]  objects
+│   │   ├── [5.0K]  00
+│   │   │   └── [1.0K]  1fafc560e17a28db6dc4e86e6a260fc16b3155
+│   │   ├── [7.7K]  12
+│   │   │   └── [3.7K]  9f4917b5d05df6acab318c02c9b3f38998baba
+│   │   ├── [7.5K]  27
+│   │   │   └── [3.5K]  fe5149a6308a77ae4088ece7b11a74fb0aac79
+│   │   ├── [4.2K]  29
+│   │   │   └── [ 164]  5c7aee3ee26f8c0cc65321361dff841ad67145
+│   │   ├── [4.1K]  32
+│   │   │   └── [  62]  7940fee44289900f03ff5dfd05ea8810d4bfa6
+│   │   ├── [4.5K]  33
+│   │   │   └── [ 539]  ba1336c3898239d64c801ed9f39f6c1b3707f3
+│   │   ├── [4.4K]  48
+│   │   │   └── [ 398]  12dc1f33d0fea7fb5a3b243b29b50f808c05d6
+│   │   ├── [4.1K]  4c
+│   │   │   └── [  62]  ad931d92ee485fd6166aedc4a8afcf1fd5dba5
+│   │   ├── [5.8K]  5d
+│   │   │   └── [1.8K]  837eae1c8049ebe58d57f1aed9581f278ddb1d
+│   │   ├── [8.5K]  61
+│   │   │   └── [4.5K]  da7162dd3f71b9ede2ed8733483f68fe76d4a2
+│   │   ├── [6.5K]  6f
+│   │   │   └── [2.5K]  8596dbb66faabb895c3a126294c1d0befc0f88
+│   │   ├── [4.8K]  72
+│   │   │   └── [ 768]  2fa91be2e9224a4f97fdfaa9c88b0b3c5c8269
+│   │   ├── [8.1K]  7a
+│   │   │   ├── [1.7K]  82515bd2a0566bf9f143e0ffafd148650ff155
+│   │   │   └── [2.3K]  9f4d7f743c1409b6d89c603efcca7150e36b1f
+│   │   ├── [4.3K]  7d
+│   │   │   └── [ 306]  2f9f5f60952d1b2c8966e80fd49973e07f509a
+│   │   ├── [4.2K]  8b
+│   │   │   └── [ 163]  310e5415d0a2e959102f4067e5ba492a043e61
+│   │   ├── [4.1K]  9c
+│   │   │   └── [  89]  982342fa8f14283a7b05533faa1d3edcf46a63
+│   │   ├── [4.6K]  9e
+│   │   │   └── [ 647]  16afe0584a9f92d321c0bab52e20d1d57d3288
+│   │   ├── [4.1K]  a7
+│   │   │   └── [  62]  fcf022c779638b3b350f10393d86b6a0e8e76a
+│   │   ├── [6.7K]  ad
+│   │   │   └── [2.7K]  aa4c2cb5035d9348eb590754c75a5be37bbd36
+│   │   ├── [4.5K]  b1
+│   │   │   └── [ 466]  e011b447acf5228161261b2118700c1b7d7168
+│   │   ├── [6.4K]  b5
+│   │   │   └── [2.4K]  75e8a93f5042eb6a1e060229ce4f8d6343124b
+│   │   ├── [5.7K]  ba
+│   │   │   └── [1.7K]  8c6f3143d795387605cc012e9786f46835c22b
+│   │   ├── [7.8K]  bd
+│   │   │   └── [3.8K]  4b016391b381890fd8fc5fd21a9a898bac0d67
+│   │   ├── [4.1K]  c7
+│   │   │   └── [  90]  2eb42a370c03fc00e905c0ee3210ec21e3f74d
+│   │   ├── [4.5K]  cb
+│   │   │   ├── [ 162]  011e9cbc2cc4da153b82926f1a8dd22a9ee78b
+│   │   │   └── [ 397]  9be6afaaddeb1504c6930451555085ed86c721
+│   │   ├── [7.3K]  cf
+│   │   │   └── [3.3K]  10e2ecec569312e80812bfcf142921d3e54581
+│   │   ├── [4.4K]  df
+│   │   │   └── [ 397]  2a4c0144182ef751e52ca2f328b329e0ab7f6b
+│   │   ├── [7.0K]  e1
+│   │   │   └── [3.0K]  81589cc3871a97e79326d3a720160a9f23505d
+│   │   ├── [4.6K]  e3
+│   │   │   └── [ 576]  8a393ff01a36799cd2789d76bcc06624a8bc20
+│   │   ├── [4.0K]  e6
+│   │   │   └── [  15]  9de29bb2d1d6434b8b29ae775ad8c2e48c5391
+│   │   ├── [5.9K]  e9
+│   │   │   └── [1.9K]  231df6af9dfad19b24375bde2de327fced4f8f
+│   │   ├── [4.6K]  ef
+│   │   │   └── [ 654]  e19e1a1ded427725c6e5dc63caad8822c25a3c
+│   │   ├── [4.0K]  info
+│   │   └── [4.0K]  pack
+│   └── [ 12K]  refs
+│       ├── [4.0K]  heads
+│       │   └── [  41]  master
+│       └── [4.0K]  tags
+├── [ 461]  .gitignore
+├── [ 12K]  models
+│   └── [8.0K]  SenseVoiceSmall
+│       └── [4.0K]  model.pt
+├── [225M]  mysql
+│   └── [225M]  data
+│       ├── [  56]  auto.cnf
+│       ├── [2.9M]  binlog.000001
+│       ├── [674K]  binlog.000002
+│       ├── [148K]  binlog.000003
+│       ├── [ 221]  binlog.000004
+│       ├── [473K]  binlog.000005
+│       ├── [2.1M]  binlog.000006
+│       ├── [ 20K]  binlog.000007
+│       ├── [588K]  binlog.000008
+│       ├── [262K]  binlog.000009
+│       ├── [ 21K]  binlog.000010
+│       ├── [4.2K]  binlog.000011
+│       ├── [ 176]  binlog.index
+│       ├── [1.7K]  ca-key.pem
+│       ├── [1.1K]  ca.pem
+│       ├── [1.1K]  client-cert.pem
+│       ├── [1.7K]  client-key.pem
+│       ├── [4.0M]  #ib_16384_0.dblwr
+│       ├── [ 12M]  #ib_16384_1.dblwr
+│       ├── [4.8K]  ib_buffer_pool
+│       ├── [ 12M]  ibdata1
+│       ├── [ 12M]  ibtmp1
+│       ├── [100M]  #innodb_redo
+│       │   ├── [3.1M]  #ib_redo13
+│       │   ├── [3.1M]  #ib_redo14_tmp
+│       │   ├── [3.1M]  #ib_redo15_tmp
+│       │   ├── [3.1M]  #ib_redo16_tmp
+│       │   ├── [3.1M]  #ib_redo17_tmp
+│       │   ├── [3.1M]  #ib_redo18_tmp
+│       │   ├── [3.1M]  #ib_redo19_tmp
+│       │   ├── [3.1M]  #ib_redo20_tmp
+│       │   ├── [3.1M]  #ib_redo21_tmp
+│       │   ├── [3.1M]  #ib_redo22_tmp
+│       │   ├── [3.1M]  #ib_redo23_tmp
+│       │   ├── [3.1M]  #ib_redo24_tmp
+│       │   ├── [3.1M]  #ib_redo25_tmp
+│       │   ├── [3.1M]  #ib_redo26_tmp
+│       │   ├── [3.1M]  #ib_redo27_tmp
+│       │   ├── [3.1M]  #ib_redo28_tmp
+│       │   ├── [3.1M]  #ib_redo29_tmp
+│       │   ├── [3.1M]  #ib_redo30_tmp
+│       │   ├── [3.1M]  #ib_redo31_tmp
+│       │   ├── [3.1M]  #ib_redo32_tmp
+│       │   ├── [3.1M]  #ib_redo33_tmp
+│       │   ├── [3.1M]  #ib_redo34_tmp
+│       │   ├── [3.1M]  #ib_redo35_tmp
+│       │   ├── [3.1M]  #ib_redo36_tmp
+│       │   ├── [3.1M]  #ib_redo37_tmp
+│       │   ├── [3.1M]  #ib_redo38_tmp
+│       │   ├── [3.1M]  #ib_redo39_tmp
+│       │   ├── [3.1M]  #ib_redo40_tmp
+│       │   ├── [3.1M]  #ib_redo41_tmp
+│       │   ├── [3.1M]  #ib_redo42_tmp
+│       │   ├── [3.1M]  #ib_redo43_tmp
+│       │   └── [3.1M]  #ib_redo44_tmp
+│       ├── [804K]  #innodb_temp
+│       │   ├── [ 80K]  temp_10.ibt
+│       │   ├── [ 80K]  temp_1.ibt
+│       │   ├── [ 80K]  temp_2.ibt
+│       │   ├── [ 80K]  temp_3.ibt
+│       │   ├── [ 80K]  temp_4.ibt
+│       │   ├── [ 80K]  temp_5.ibt
+│       │   ├── [ 80K]  temp_6.ibt
+│       │   ├── [ 80K]  temp_7.ibt
+│       │   ├── [ 80K]  temp_8.ibt
+│       │   └── [ 80K]  temp_9.ibt
+│       ├── [ 22K]  mysql
+│       │   ├── [5.8K]  general_log_224.sdi
+│       │   ├── [  35]  general_log.CSM
+│       │   ├── [   0]  general_log.CSV
+│       │   ├── [ 12K]  slow_log_225.sdi
+│       │   ├── [  35]  slow_log.CSM
+│       │   └── [   0]  slow_log.CSV
+│       ├── [ 31M]  mysql.ibd
+│       ├── [  27]  mysql.sock -> /var/run/mysqld/mysqld.sock
+│       ├── [ 124]  mysql_upgrade_history
+│       ├── [1.5M]  performance_schema
+│       │   ├── [6.0K]  accounts_153.sdi
+│       │   ├── [ 13K]  binary_log_trans_200.sdi
+│       │   ├── [3.9K]  cond_instances_87.sdi
+│       │   ├── [ 16K]  data_locks_169.sdi
+│       │   ├── [ 14K]  data_lock_waits_170.sdi
+│       │   ├── [7.5K]  error_log_88.sdi
+│       │   ├── [7.5K]  events_errors_su_147.sdi
+│       │   ├── [7.5K]  events_errors_su_148.sdi
+│       │   ├── [8.3K]  events_errors_su_149.sdi
+│       │   ├── [7.5K]  events_errors_su_150.sdi
+│       │   ├── [6.7K]  events_errors_su_151.sdi
+│       │   ├── [ 11K]  events_stages_cu_119.sdi
+│       │   ├── [ 11K]  events_stages_hi_120.sdi
+│       │   ├── [ 11K]  events_stages_hi_121.sdi
+│       │   ├── [7.5K]  events_stages_su_122.sdi
+│       │   ├── [8.3K]  events_stages_su_123.sdi
+│       │   ├── [7.5K]  events_stages_su_124.sdi
+│       │   ├── [7.5K]  events_stages_su_125.sdi
+│       │   ├── [6.7K]  events_stages_su_126.sdi
+│       │   ├── [ 38K]  events_statement_127.sdi
+│       │   ├── [ 38K]  events_statement_128.sdi
+│       │   ├── [ 38K]  events_statement_129.sdi
+│       │   ├── [ 26K]  events_statement_130.sdi
+│       │   ├── [ 26K]  events_statement_131.sdi
+│       │   ├── [ 26K]  events_statement_132.sdi
+│       │   ├── [ 26K]  events_statement_133.sdi
+│       │   ├── [ 25K]  events_statement_134.sdi
+│       │   ├── [ 32K]  events_statement_135.sdi
+│       │   ├── [ 31K]  events_statement_136.sdi
+│       │   ├── [6.0K]  events_statement_137.sdi
+│       │   ├── [7.7K]  events_statement_138.sdi
+│       │   ├── [ 21K]  events_transacti_139.sdi
+│       │   ├── [ 21K]  events_transacti_140.sdi
+│       │   ├── [ 21K]  events_transacti_141.sdi
+│       │   ├── [ 15K]  events_transacti_142.sdi
+│       │   ├── [ 16K]  events_transacti_143.sdi
+│       │   ├── [ 15K]  events_transacti_144.sdi
+│       │   ├── [ 15K]  events_transacti_145.sdi
+│       │   ├── [ 15K]  events_transacti_146.sdi
+│       │   ├── [ 17K]  events_waits_cur_89.sdi
+│       │   ├── [ 17K]  events_waits_his_90.sdi
+│       │   ├── [ 17K]  events_waits_his_91.sdi
+│       │   ├── [7.5K]  events_waits_sum_92.sdi
+│       │   ├── [7.8K]  events_waits_sum_93.sdi
+│       │   ├── [7.5K]  events_waits_sum_94.sdi
+│       │   ├── [7.5K]  events_waits_sum_95.sdi
+│       │   ├── [8.3K]  events_waits_sum_96.sdi
+│       │   ├── [6.7K]  events_waits_sum_97.sdi
+│       │   ├── [7.4K]  file_instances_98.sdi
+│       │   ├── [ 25K]  file_summary_by__100.sdi
+│       │   ├── [ 20K]  file_summary_by__99.sdi
+│       │   ├── [3.1K]  global_status_190.sdi
+│       │   ├── [9.2K]  global_variable__197.sdi
+│       │   ├── [3.1K]  global_variables_193.sdi
+│       │   ├── [ 26K]  host_cache_101.sdi
+│       │   ├── [5.2K]  hosts_154.sdi
+│       │   ├── [9.3K]  keyring_componen_202.sdi
+│       │   ├── [4.6K]  keyring_keys_160.sdi
+│       │   ├── [4.2K]  log_status_183.sdi
+│       │   ├── [ 12K]  memory_summary_b_162.sdi
+│       │   ├── [ 11K]  memory_summary_b_163.sdi
+│       │   ├── [ 11K]  memory_summary_b_164.sdi
+│       │   ├── [ 11K]  memory_summary_b_165.sdi
+│       │   ├── [ 11K]  memory_summary_g_161.sdi
+│       │   ├── [ 12K]  metadata_locks_168.sdi
+│       │   ├── [5.0K]  mutex_instances_102.sdi
+│       │   ├── [7.6K]  objects_summary__103.sdi
+│       │   ├── [4.2K]  performance_time_104.sdi
+│       │   ├── [3.1K]  persisted_variab_198.sdi
+│       │   ├── [ 35K]  prepared_stateme_184.sdi
+│       │   ├── [8.2K]  processlist_105.sdi
+│       │   ├── [8.0K]  replication_appl_174.sdi
+│       │   ├── [4.8K]  replication_appl_175.sdi
+│       │   ├── [ 19K]  replication_appl_176.sdi
+│       │   ├── [ 27K]  replication_appl_177.sdi
+│       │   ├── [6.6K]  replication_appl_179.sdi
+│       │   ├── [4.5K]  replication_appl_180.sdi
+│       │   ├── [7.1K]  replication_asyn_181.sdi
+│       │   ├── [5.2K]  replication_asyn_182.sdi
+│       │   ├── [ 45K]  replication_conn_171.sdi
+│       │   ├── [ 24K]  replication_conn_173.sdi
+│       │   ├── [9.3K]  replication_grou_172.sdi
+│       │   ├── [ 12K]  replication_grou_178.sdi
+│       │   ├── [5.8K]  rwlock_instances_106.sdi
+│       │   ├── [4.6K]  session_account__159.sdi
+│       │   ├── [4.6K]  session_connect__158.sdi
+│       │   ├── [3.1K]  session_status_191.sdi
+│       │   ├── [3.1K]  session_variable_194.sdi
+│       │   ├── [6.0K]  setup_actors_107.sdi
+│       │   ├── [3.2K]  setup_consumers_108.sdi
+│       │   ├── [7.8K]  setup_instrument_109.sdi
+│       │   ├── [4.1K]  setup_loggers_110.sdi
+│       │   ├── [4.7K]  setup_meters_111.sdi
+│       │   ├── [6.8K]  setup_metrics_112.sdi
+│       │   ├── [6.3K]  setup_objects_113.sdi
+│       │   ├── [6.7K]  setup_threads_114.sdi
+│       │   ├── [8.9K]  socket_instances_155.sdi
+│       │   ├── [ 21K]  socket_summary_b_156.sdi
+│       │   ├── [ 20K]  socket_summary_b_157.sdi
+│       │   ├── [4.8K]  status_by_accoun_186.sdi
+│       │   ├── [4.0K]  status_by_host_187.sdi
+│       │   ├── [4.0K]  status_by_thread_188.sdi
+│       │   ├── [4.0K]  status_by_user_189.sdi
+│       │   ├── [9.4K]  table_handles_166.sdi
+│       │   ├── [ 32K]  table_io_waits_s_115.sdi
+│       │   ├── [ 31K]  table_io_waits_s_116.sdi
+│       │   ├── [ 55K]  table_lock_waits_117.sdi
+│       │   ├── [8.0K]  temporary_accoun_167.sdi
+│       │   ├── [ 23K]  threads_118.sdi
+│       │   ├── [ 16K]  tls_channel_stat_201.sdi
+│       │   ├── [5.7K]  user_defined_fun_199.sdi
+│       │   ├── [5.2K]  users_152.sdi
+│       │   ├── [4.0K]  user_variables_b_185.sdi
+│       │   ├── [4.0K]  variables_by_thr_192.sdi
+│       │   ├── [7.8K]  variables_info_195.sdi
+│       │   └── [6.2K]  variables_metada_196.sdi
+│       ├── [1.7K]  private_key.pem
+│       ├── [ 452]  public_key.pem
+│       ├── [1.1K]  server-cert.pem
+│       ├── [1.7K]  server-key.pem
+│       ├── [116K]  sys
+│       │   └── [112K]  sys_config.ibd
+│       ├── [ 16M]  undo_001
+│       ├── [ 16M]  undo_002
+│       └── [ 13M]  xiaozhi_esp32_server
+│           ├── [112K]  ai_agent_chat_audio.ibd
+│           ├── [9.0M]  ai_agent_chat_history.ibd
+│           ├── [128K]  ai_agent_chat_title.ibd
+│           ├── [128K]  ai_agent_context_provider.ibd
+│           ├── [128K]  ai_agent_correct_word_file.ibd
+│           ├── [128K]  ai_agent_correct_word_item.ibd
+│           ├── [160K]  ai_agent_correct_word_mapping.ibd
+│           ├── [128K]  ai_agent.ibd
+│           ├── [128K]  ai_agent_plugin_mapping.ibd
+│           ├── [144K]  ai_agent_tag.ibd
+│           ├── [160K]  ai_agent_tag_relation.ibd
+│           ├── [112K]  ai_agent_template.ibd
+│           ├── [112K]  ai_agent_voice_print.ibd
+│           ├── [112K]  ai_device_address_book.ibd
+│           ├── [128K]  ai_device.ibd
+│           ├── [208K]  ai_model_config.ibd
+│           ├── [160K]  ai_model_provider.ibd
+│           ├── [112K]  ai_ota.ibd
+│           ├── [176K]  ai_rag_dataset.ibd
+│           ├── [160K]  ai_rag_knowledge_document.ibd
+│           ├── [208K]  ai_tts_voice.ibd
+│           ├── [176K]  ai_voice_clone.ibd
+│           ├── [128K]  DATABASECHANGELOG.ibd
+│           ├── [112K]  DATABASECHANGELOGLOCK.ibd
+│           ├── [144K]  sys_dict_data.ibd
+│           ├── [128K]  sys_dict_type.ibd
+│           ├── [128K]  sys_params.ibd
+│           ├── [128K]  sys_user.ibd
+│           └── [144K]  sys_user_token.ibd
+└── [4.0K]  uploadfile
+
+ 793M used in 64 directories, 324 files

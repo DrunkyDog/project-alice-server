@@ -1,4 +1,4 @@
-import jwt
+aimport jwt
 import time
 import json
 import os

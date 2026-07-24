@@ -141,7 +141,7 @@ function httpHandlerError(info, failCallback, networkFailCallback) {
     if (networkFailCallback) {
         networkFailCallback(info)
     } else {
-        showDanger(`网络请求出现了错误【${info.status}】`)
+        showDanger(`Network Request Failed【${info.status}】`)
     }
     return true
 }

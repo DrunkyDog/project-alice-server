@@ -10,9 +10,9 @@ import asyncio
 import threading
 import traceback
 import subprocess
-import websockets
-import opuslib_next
-import numpy as np
+import websockets  # type: ignore[import-untyped]
+import opuslib_next  # type: ignore[import-untyped]
+import numpy as np  # type: ignore[import-untyped]
 
 from core.utils.util import (
     extract_json_from_string,
@@ -20,7 +20,7 @@ from core.utils.util import (
     check_asr_update,
     filter_sensitive_info,
 )
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 from collections import deque
 from core.utils.modules_initialize import (
     initialize_modules,
@@ -101,12 +101,12 @@ class ConnectionHandler:
 
         self.read_config_from_api = self.config.get("read_config_from_api", False)
 
-        self.websocket: websockets.ServerConnection | None = None
-        self.headers = None
-        self.device_id = None
-        self.client_ip = None
-        self.prompt = None
-        self.welcome_msg = None
+        self.websocket: Optional["websockets.ServerConnection"] = None
+        self.headers: Optional[Dict[str, str]] = None
+        self.device_id: Optional[str] = None
+        self.client_ip: Optional[str] = None
+        self.prompt: Optional[str] = None
+        self.welcome_msg: Optional[Dict[str, Any]] = None
         self.max_output_size = 0
         self.chat_history_conf = 0
         self.audio_format = "opus"
@@ -188,6 +188,9 @@ class ConnectionHandler:
 
         # {"mcp":true} 表示启用MCP功能
         self.features = None
+
+        # 设备端MCP客户端，在helloHandle.py中按需初始化
+        self.mcp_client = None
 
         # 标记连接是否来自MQTT
         self.conn_from_mqtt_gateway = False

@@ -10,11 +10,11 @@ export default {
         USER_TYPE: 'USER_TYPE'
     },
     Lang: {
-        'zh_cn': 'zh_cn', 'zh_tw': 'zh_tw', 'en': 'en'
+        'zh_cn': 'Chinese Mandarin', 'zh_tw': 'Taiwanese Mandarin', 'en': 'English'
     },
     FONT_SIZE: {
-        'big': 'big',
-        'normal': 'normal',
+        'big': 'Big',
+        'normal': 'Normal',
     }, // 获取map中的某key
     get(map, key) {
         return map[key] || HAVE_NO_RESULT

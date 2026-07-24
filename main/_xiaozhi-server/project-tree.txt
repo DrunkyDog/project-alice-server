@@ -1,0 +1,1971 @@
+.
+├── Dockerfile-server
+├── Dockerfile-server-base
+├── Dockerfile-web
+├── docker-setup.sh
+├── docs
+│   ├── ali-sms-integration.md
+│   ├── all-in-one-digital-human-setup.md
+│   ├── context-provider-integration.md
+│   ├── contributor_open_letter.md
+│   ├── Deployment_all.md
+│   ├── Deployment.md
+│   ├── device-call-guide.md
+│   ├── dev-ops-integration.md
+│   ├── digital-human-wakeword.md
+│   ├── docker
+│   │   ├── nginx.conf
+│   │   └── start.sh
+│   ├── docker-build.md
+│   ├── FAQ.md
+│   ├── firmware-build.md
+│   ├── firmware-setting.md
+│   ├── fish-speech-integration.md
+│   ├── homeassistant-integration.md
+│   ├── huoshan-streamTTS-voice-cloning.md
+│   ├── images
+│   │   ├── alisms
+│   │   │   ├── sms-01.png
+│   │   │   ├── sms-02.png
+│   │   │   ├── sms-11.png
+│   │   │   ├── sms-21.png
+│   │   │   ├── sms-22.png
+│   │   │   ├── sms-23.png
+│   │   │   ├── sms-24.png
+│   │   │   ├── sms-25.png
+│   │   │   ├── sms-31.png
+│   │   │   └── sms-32.png
+│   │   ├── banner1.png
+│   │   ├── banner2.png
+│   │   ├── conda_env_1.png
+│   │   ├── conda_env_2.png
+│   │   ├── demo0.png
+│   │   ├── demo10.png
+│   │   ├── demo11.png
+│   │   ├── demo12.png
+│   │   ├── demo13.png
+│   │   ├── demo14.png
+│   │   ├── demo1.png
+│   │   ├── demo2.png
+│   │   ├── demo3.png
+│   │   ├── demo4.png
+│   │   ├── demo5.png
+│   │   ├── demo6.png
+│   │   ├── demo7.png
+│   │   ├── demo8.png
+│   │   ├── demo9.png
+│   │   ├── deploy1.png
+│   │   ├── deploy2.png
+│   │   ├── firmware-setting-ota.png
+│   │   ├── fishspeech
+│   │   │   ├── autodl-01.png
+│   │   │   └── autodl-02.png
+│   │   ├── hnlg.jpg
+│   │   ├── image-clone-integration-01.png
+│   │   ├── image-clone-integration-02.png
+│   │   ├── image-clone-integration-03.png
+│   │   ├── image-ha-integration-01.png
+│   │   ├── image-ha-integration-02.png
+│   │   ├── image-ha-integration-03.png
+│   │   ├── image-ha-integration-04.png
+│   │   ├── image-ha-integration-05.png
+│   │   ├── image-ha-integration-06.png
+│   │   ├── __init__.py
+│   │   ├── logo_bailing.png
+│   │   ├── logo_contributors.png
+│   │   ├── logo_huiyuan.png
+│   │   ├── logo_junsen.png
+│   │   ├── logo_qinren.png
+│   │   ├── logo_tenclass.png
+│   │   ├── logo_xuanfeng.png
+│   │   └── manager-mobile
+│   │       ├── 打包发行步骤1.png
+│   │       ├── 打包发行步骤2.png
+│   │       ├── 本地运行.png
+│   │       ├── 生成appid.png
+│   │       └── 重新识别项目.png
+│   ├── index-stream-integration.md
+│   ├── mcp-endpoint-enable.md
+│   ├── mcp-endpoint-integration.md
+│   ├── mcp-get-device-info.md
+│   ├── mcp-vision-integration.md
+│   ├── mqtt-gateway-integration.md
+│   ├── newsnow_plugin_config.md
+│   ├── ota-upgrade-guide.md
+│   ├── paddlespeech-deploy.md
+│   ├── performance_tester.md
+│   ├── powermem-integration.md
+│   ├── ragflow-integration.md
+│   ├── readme
+│   │   ├── README_de.md
+│   │   ├── README_en.md
+│   │   ├── README_pt_BR.md
+│   │   └── README_vi.md
+│   ├── voiceprint-integration.md
+│   ├── weather-integration.md
+│   └── web-search-integration.md
+├── LICENSE
+├── main
+│   ├── digital-human
+│   │   ├── css
+│   │   │   ├── bg.png
+│   │   │   └── index.css
+│   │   ├── favicon.ico
+│   │   ├── images
+│   │   │   ├── 1.png
+│   │   │   ├── 2.png
+│   │   │   └── 3.png
+│   │   ├── index.html
+│   │   ├── js
+│   │   │   ├── app.js
+│   │   │   ├── config
+│   │   │   │   ├── default-mcp-tools.json
+│   │   │   │   └── manager.js
+│   │   │   ├── core
+│   │   │   │   ├── audio
+│   │   │   │   │   ├── opus-codec.js
+│   │   │   │   │   ├── player.js
+│   │   │   │   │   ├── recorder.js
+│   │   │   │   │   └── stream-context.js
+│   │   │   │   ├── mcp
+│   │   │   │   │   └── tools.js
+│   │   │   │   └── network
+│   │   │   │       ├── ota-connector.js
+│   │   │   │       ├── wakeword-bridge.js
+│   │   │   │       └── websocket.js
+│   │   │   ├── live2d
+│   │   │   │   ├── cubism4.min.js
+│   │   │   │   ├── live2dcubismcore.min.js
+│   │   │   │   ├── live2d.js
+│   │   │   │   └── pixi.js
+│   │   │   ├── ui
+│   │   │   │   ├── background-load.js
+│   │   │   │   └── controller.js
+│   │   │   └── utils
+│   │   │       ├── blocking-queue.js
+│   │   │       ├── libopus.js
+│   │   │       └── logger.js
+│   │   ├── README.md
+│   │   ├── resources
+│   │   │   ├── hiyori_pro_zh
+│   │   │   │   ├── hiyori_pro_t04.can3
+│   │   │   │   ├── hiyori_pro_t11.cmo3
+│   │   │   │   ├── ReadMe.txt
+│   │   │   │   └── runtime
+│   │   │   │       ├── hiyori_pro_t11.2048
+│   │   │   │       │   ├── texture_00.png
+│   │   │   │       │   └── texture_01.png
+│   │   │   │       ├── hiyori_pro_t11.cdi3.json
+│   │   │   │       ├── hiyori_pro_t11.moc3
+│   │   │   │       ├── hiyori_pro_t11.model3.json
+│   │   │   │       ├── hiyori_pro_t11.physics3.json
+│   │   │   │       ├── hiyori_pro_t11.pose3.json
+│   │   │   │       └── motion
+│   │   │   │           ├── hiyori_m01.motion3.json
+│   │   │   │           ├── hiyori_m02.motion3.json
+│   │   │   │           ├── hiyori_m03.motion3.json
+│   │   │   │           ├── hiyori_m04.motion3.json
+│   │   │   │           ├── hiyori_m05.motion3.json
+│   │   │   │           ├── hiyori_m06.motion3.json
+│   │   │   │           ├── hiyori_m07.motion3.json
+│   │   │   │           ├── hiyori_m08.motion3.json
+│   │   │   │           ├── hiyori_m09.motion3.json
+│   │   │   │           └── hiyori_m10.motion3.json
+│   │   │   └── natori_pro_zh
+│   │   │       ├── natori_pro_exp_t03.can3
+│   │   │       ├── natori_pro_motions_t03.can3
+│   │   │       ├── natori_pro_t06.cmo3
+│   │   │       ├── ReadMe.txt
+│   │   │       └── runtime
+│   │   │           ├── exp
+│   │   │           │   ├── Angry.exp3.json
+│   │   │           │   ├── Blushing.exp3.json
+│   │   │           │   ├── exp_01.exp3.json
+│   │   │           │   ├── exp_02.exp3.json
+│   │   │           │   ├── exp_03.exp3.json
+│   │   │           │   ├── exp_04.exp3.json
+│   │   │           │   ├── exp_05.exp3.json
+│   │   │           │   ├── Normal.exp3.json
+│   │   │           │   ├── Sad.exp3.json
+│   │   │           │   ├── Smile.exp3.json
+│   │   │           │   └── Surprised.exp3.json
+│   │   │           ├── motions
+│   │   │           │   ├── mtn_00.motion3.json
+│   │   │           │   ├── mtn_01.motion3.json
+│   │   │           │   ├── mtn_02.motion3.json
+│   │   │           │   ├── mtn_03.motion3.json
+│   │   │           │   ├── mtn_04.motion3.json
+│   │   │           │   ├── mtn_05.motion3.json
+│   │   │           │   ├── mtn_06.motion3.json
+│   │   │           │   └── mtn_07.motion3.json
+│   │   │           ├── natori.pose3.json
+│   │   │           ├── natori_pro_t06.4096
+│   │   │           │   └── texture_00.png
+│   │   │           ├── natori_pro_t06.cdi3.json
+│   │   │           ├── natori_pro_t06.moc3
+│   │   │           ├── natori_pro_t06.model3.json
+│   │   │           └── natori_pro_t06.physics3.json
+│   │   ├── start.py
+│   │   └── wakeword_runtime
+│   │       ├── bridge
+│   │       │   ├── event_bridge.py
+│   │       │   └── __init__.py
+│   │       ├── config
+│   │       │   ├── config_loader.py
+│   │       │   ├── __init__.py
+│   │       │   └── logging_setup.py
+│   │       ├── config.json
+│   │       ├── core
+│   │       │   ├── detector_assets.py
+│   │       │   ├── detector.py
+│   │       │   ├── __init__.py
+│   │       │   └── microphone.py
+│   │       ├── __init__.py
+│   │       ├── plugins
+│   │       │   ├── audio.py
+│   │       │   ├── base.py
+│   │       │   ├── __init__.py
+│   │       │   ├── manager.py
+│   │       │   └── wake_word.py
+│   │       ├── requirements.txt
+│   │       └── runtime
+│   │           ├── app.py
+│   │           ├── http_server.py
+│   │           └── __init__.py
+│   ├── manager-api
+│   │   ├── pom.xml
+│   │   ├── README.md
+│   │   └── src
+│   │       ├── main
+│   │       │   ├── java
+│   │       │   │   └── xiaozhi
+│   │       │   │       ├── AdminApplication.java
+│   │       │   │       ├── common
+│   │       │   │       │   ├── annotation
+│   │       │   │       │   │   ├── DataFilter.java
+│   │       │   │       │   │   └── LogOperation.java
+│   │       │   │       │   ├── aspect
+│   │       │   │       │   │   └── RedisAspect.java
+│   │       │   │       │   ├── config
+│   │       │   │       │   │   ├── AsyncConfig.java
+│   │       │   │       │   │   ├── MybatisPlusConfig.java
+│   │       │   │       │   │   ├── RestTemplateConfig.java
+│   │       │   │       │   │   └── SwaggerConfig.java
+│   │       │   │       │   ├── constant
+│   │       │   │       │   │   └── Constant.java
+│   │       │   │       │   ├── convert
+│   │       │   │       │   │   └── DateConverter.java
+│   │       │   │       │   ├── dao
+│   │       │   │       │   │   └── BaseDao.java
+│   │       │   │       │   ├── entity
+│   │       │   │       │   │   └── BaseEntity.java
+│   │       │   │       │   ├── exception
+│   │       │   │       │   │   ├── ErrorCode.java
+│   │       │   │       │   │   ├── RenExceptionHandler.java
+│   │       │   │       │   │   └── RenException.java
+│   │       │   │       │   ├── handler
+│   │       │   │       │   │   └── FieldMetaObjectHandler.java
+│   │       │   │       │   ├── interceptor
+│   │       │   │       │   │   ├── DataFilterInterceptor.java
+│   │       │   │       │   │   └── DataScope.java
+│   │       │   │       │   ├── page
+│   │       │   │       │   │   ├── PageData.java
+│   │       │   │       │   │   └── TokenDTO.java
+│   │       │   │       │   ├── redis
+│   │       │   │       │   │   ├── RedisConfig.java
+│   │       │   │       │   │   ├── RedisKeys.java
+│   │       │   │       │   │   └── RedisUtils.java
+│   │       │   │       │   ├── service
+│   │       │   │       │   │   ├── BaseService.java
+│   │       │   │       │   │   ├── CrudService.java
+│   │       │   │       │   │   └── impl
+│   │       │   │       │   │       ├── BaseServiceImpl.java
+│   │       │   │       │   │       └── CrudServiceImpl.java
+│   │       │   │       │   ├── user
+│   │       │   │       │   │   └── UserDetail.java
+│   │       │   │       │   ├── utils
+│   │       │   │       │   │   ├── AESUtils.java
+│   │       │   │       │   │   ├── ConvertUtils.java
+│   │       │   │       │   │   ├── DateUtils.java
+│   │       │   │       │   │   ├── HashEncryptionUtil.java
+│   │       │   │       │   │   ├── HttpContextUtils.java
+│   │       │   │       │   │   ├── IpUtils.java
+│   │       │   │       │   │   ├── JsonRpcTwo.java
+│   │       │   │       │   │   ├── JsonUtils.java
+│   │       │   │       │   │   ├── MessageUtils.java
+│   │       │   │       │   │   ├── PropertiesUtils.java
+│   │       │   │       │   │   ├── ResourcesUtils.java
+│   │       │   │       │   │   ├── Result.java
+│   │       │   │       │   │   ├── ResultUtils.java
+│   │       │   │       │   │   ├── SensitiveDataUtils.java
+│   │       │   │       │   │   ├── Sm2DecryptUtil.java
+│   │       │   │       │   │   ├── SM2Utils.java
+│   │       │   │       │   │   ├── SpringContextUtils.java
+│   │       │   │       │   │   ├── ToolUtil.java
+│   │       │   │       │   │   ├── TreeNode.java
+│   │       │   │       │   │   └── TreeUtils.java
+│   │       │   │       │   ├── validator
+│   │       │   │       │   │   ├── AssertUtils.java
+│   │       │   │       │   │   ├── group
+│   │       │   │       │   │   │   ├── AddGroup.java
+│   │       │   │       │   │   │   ├── DefaultGroup.java
+│   │       │   │       │   │   │   └── UpdateGroup.java
+│   │       │   │       │   │   └── ValidatorUtils.java
+│   │       │   │       │   └── xss
+│   │       │   │       │       ├── SqlFilter.java
+│   │       │   │       │       ├── XssConfig.java
+│   │       │   │       │       ├── XssFilter.java
+│   │       │   │       │       ├── XssHttpServletRequestWrapper.java
+│   │       │   │       │       ├── XssProperties.java
+│   │       │   │       │       └── XssUtils.java
+│   │       │   │       └── modules
+│   │       │   │           ├── agent
+│   │       │   │           │   ├── controller
+│   │       │   │           │   │   ├── AgentChatHistoryController.java
+│   │       │   │           │   │   ├── AgentController.java
+│   │       │   │           │   │   ├── AgentMcpAccessPointController.java
+│   │       │   │           │   │   ├── AgentSnapshotController.java
+│   │       │   │           │   │   ├── AgentTemplateController.java
+│   │       │   │           │   │   └── AgentVoicePrintController.java
+│   │       │   │           │   ├── dao
+│   │       │   │           │   │   ├── AgentChatTitleDao.java
+│   │       │   │           │   │   ├── AgentContextProviderDao.java
+│   │       │   │           │   │   ├── AgentCorrectWordMappingDao.java
+│   │       │   │           │   │   ├── AgentDao.java
+│   │       │   │           │   │   ├── AgentPluginMappingMapper.java
+│   │       │   │           │   │   ├── AgentSnapshotDao.java
+│   │       │   │           │   │   ├── AgentTagDao.java
+│   │       │   │           │   │   ├── AgentTagRelationDao.java
+│   │       │   │           │   │   ├── AgentTemplateDao.java
+│   │       │   │           │   │   ├── AgentVoicePrintDao.java
+│   │       │   │           │   │   ├── AiAgentChatAudioDao.java
+│   │       │   │           │   │   └── AiAgentChatHistoryDao.java
+│   │       │   │           │   ├── dto
+│   │       │   │           │   │   ├── AgentChatHistoryDTO.java
+│   │       │   │           │   │   ├── AgentChatHistoryReportDTO.java
+│   │       │   │           │   │   ├── AgentChatSessionDTO.java
+│   │       │   │           │   │   ├── AgentChatSummaryDTO.java
+│   │       │   │           │   │   ├── AgentCreateDTO.java
+│   │       │   │           │   │   ├── AgentDTO.java
+│   │       │   │           │   │   ├── AgentMemoryDTO.java
+│   │       │   │           │   │   ├── AgentSnapshotDataDTO.java
+│   │       │   │           │   │   ├── AgentSnapshotPageDTO.java
+│   │       │   │           │   │   ├── AgentSnapshotRestoreDTO.java
+│   │       │   │           │   │   ├── AgentSnapshotTagDTO.java
+│   │       │   │           │   │   ├── AgentTagDTO.java
+│   │       │   │           │   │   ├── AgentUpdateDTO.java
+│   │       │   │           │   │   ├── AgentVoicePrintSaveDTO.java
+│   │       │   │           │   │   ├── AgentVoicePrintUpdateDTO.java
+│   │       │   │           │   │   ├── ContextProviderDTO.java
+│   │       │   │           │   │   └── IdentifyVoicePrintResponse.java
+│   │       │   │           │   ├── entity
+│   │       │   │           │   │   ├── AgentChatAudioEntity.java
+│   │       │   │           │   │   ├── AgentChatHistoryEntity.java
+│   │       │   │           │   │   ├── AgentChatTitleEntity.java
+│   │       │   │           │   │   ├── AgentContextProviderEntity.java
+│   │       │   │           │   │   ├── AgentCorrectWordMappingEntity.java
+│   │       │   │           │   │   ├── AgentEntity.java
+│   │       │   │           │   │   ├── AgentPluginMapping.java
+│   │       │   │           │   │   ├── AgentSnapshotEntity.java
+│   │       │   │           │   │   ├── AgentTagEntity.java
+│   │       │   │           │   │   ├── AgentTagRelationEntity.java
+│   │       │   │           │   │   ├── AgentTemplateEntity.java
+│   │       │   │           │   │   └── AgentVoicePrintEntity.java
+│   │       │   │           │   ├── Enums
+│   │       │   │           │   │   ├── AgentChatHistoryType.java
+│   │       │   │           │   │   ├── AgentSnapshotField.java
+│   │       │   │           │   │   └── XiaoZhiMcpJsonRpcJson.java
+│   │       │   │           │   ├── service
+│   │       │   │           │   │   ├── AgentChatAudioService.java
+│   │       │   │           │   │   ├── AgentChatHistoryService.java
+│   │       │   │           │   │   ├── AgentChatSummaryService.java
+│   │       │   │           │   │   ├── AgentChatTitleService.java
+│   │       │   │           │   │   ├── AgentContextProviderService.java
+│   │       │   │           │   │   ├── AgentMcpAccessPointService.java
+│   │       │   │           │   │   ├── AgentPluginMappingService.java
+│   │       │   │           │   │   ├── AgentService.java
+│   │       │   │           │   │   ├── AgentSnapshotService.java
+│   │       │   │           │   │   ├── AgentTagService.java
+│   │       │   │           │   │   ├── AgentTemplateService.java
+│   │       │   │           │   │   ├── AgentVoicePrintService.java
+│   │       │   │           │   │   ├── biz
+│   │       │   │           │   │   │   ├── AgentChatHistoryBizService.java
+│   │       │   │           │   │   │   └── impl
+│   │       │   │           │   │   │       └── AgentChatHistoryBizServiceImpl.java
+│   │       │   │           │   │   └── impl
+│   │       │   │           │   │       ├── AgentChatAudioServiceImpl.java
+│   │       │   │           │   │       ├── AgentChatHistoryServiceImpl.java
+│   │       │   │           │   │       ├── AgentChatSummaryServiceImpl.java
+│   │       │   │           │   │       ├── AgentChatTitleServiceImpl.java
+│   │       │   │           │   │       ├── AgentContextProviderServiceImpl.java
+│   │       │   │           │   │       ├── AgentMcpAccessPointServiceImpl.java
+│   │       │   │           │   │       ├── AgentPluginMappingServiceImpl.java
+│   │       │   │           │   │       ├── AgentServiceImpl.java
+│   │       │   │           │   │       ├── AgentSnapshotRedactionRunner.java
+│   │       │   │           │   │       ├── AgentSnapshotServiceImpl.java
+│   │       │   │           │   │       ├── AgentTagServiceImpl.java
+│   │       │   │           │   │       ├── AgentTemplateServiceImpl.java
+│   │       │   │           │   │       └── AgentVoicePrintServiceImpl.java
+│   │       │   │           │   ├── typehandler
+│   │       │   │           │   │   └── ContextProviderListTypeHandler.java
+│   │       │   │           │   └── vo
+│   │       │   │           │       ├── AgentChatHistoryUserVO.java
+│   │       │   │           │       ├── AgentInfoVO.java
+│   │       │   │           │       ├── AgentSnapshotVO.java
+│   │       │   │           │       ├── AgentTemplateVO.java
+│   │       │   │           │       └── AgentVoicePrintVO.java
+│   │       │   │           ├── config
+│   │       │   │           │   ├── controller
+│   │       │   │           │   │   └── ConfigController.java
+│   │       │   │           │   ├── dto
+│   │       │   │           │   │   ├── AgentModelsDTO.java
+│   │       │   │           │   │   └── CorrectWordsDTO.java
+│   │       │   │           │   ├── init
+│   │       │   │           │   │   └── SystemInitConfig.java
+│   │       │   │           │   └── service
+│   │       │   │           │       ├── ConfigService.java
+│   │       │   │           │       └── impl
+│   │       │   │           │           └── ConfigServiceImpl.java
+│   │       │   │           ├── correctword
+│   │       │   │           │   ├── controller
+│   │       │   │           │   │   └── CorrectWordController.java
+│   │       │   │           │   ├── dao
+│   │       │   │           │   │   ├── CorrectWordFileDao.java
+│   │       │   │           │   │   └── CorrectWordItemDao.java
+│   │       │   │           │   ├── dto
+│   │       │   │           │   │   └── CorrectWordFileCreateDTO.java
+│   │       │   │           │   ├── entity
+│   │       │   │           │   │   ├── CorrectWordFileEntity.java
+│   │       │   │           │   │   └── CorrectWordItemEntity.java
+│   │       │   │           │   ├── service
+│   │       │   │           │   │   ├── CorrectWordFileService.java
+│   │       │   │           │   │   └── impl
+│   │       │   │           │   │       └── CorrectWordFileServiceImpl.java
+│   │       │   │           │   └── vo
+│   │       │   │           │       ├── CorrectWordFileVO.java
+│   │       │   │           │       └── CorrectWordSimpleVO.java
+│   │       │   │           ├── device
+│   │       │   │           │   ├── controller
+│   │       │   │           │   │   ├── DeviceController.java
+│   │       │   │           │   │   ├── OTAController.java
+│   │       │   │           │   │   └── OTAMagController.java
+│   │       │   │           │   ├── dao
+│   │       │   │           │   │   ├── DeviceAddressBookDao.java
+│   │       │   │           │   │   ├── DeviceDao.java
+│   │       │   │           │   │   └── OtaDao.java
+│   │       │   │           │   ├── dto
+│   │       │   │           │   │   ├── DeviceAddressBookAliasDTO.java
+│   │       │   │           │   │   ├── DeviceAddressBookPermissionDTO.java
+│   │       │   │           │   │   ├── DeviceManualAddDTO.java
+│   │       │   │           │   │   ├── DevicePageUserDTO.java
+│   │       │   │           │   │   ├── DeviceRegisterDTO.java
+│   │       │   │           │   │   ├── DeviceReportReqDTO.java
+│   │       │   │           │   │   ├── DeviceReportRespDTO.java
+│   │       │   │           │   │   ├── DeviceToolsCallReqDTO.java
+│   │       │   │           │   │   ├── DeviceUnBindDTO.java
+│   │       │   │           │   │   └── DeviceUpdateDTO.java
+│   │       │   │           │   ├── entity
+│   │       │   │           │   │   ├── DeviceAddressBookEntity.java
+│   │       │   │           │   │   ├── DeviceEntity.java
+│   │       │   │           │   │   └── OtaEntity.java
+│   │       │   │           │   ├── service
+│   │       │   │           │   │   ├── DeviceAddressBookService.java
+│   │       │   │           │   │   ├── DeviceService.java
+│   │       │   │           │   │   ├── impl
+│   │       │   │           │   │   │   ├── DeviceAddressBookServiceImpl.java
+│   │       │   │           │   │   │   ├── DeviceServiceImpl.java
+│   │       │   │           │   │   │   ├── MqttGatewayAuthorization.java
+│   │       │   │           │   │   │   └── OtaServiceImpl.java
+│   │       │   │           │   │   └── OtaService.java
+│   │       │   │           │   └── vo
+│   │       │   │           │       ├── DeviceOtaVO.java
+│   │       │   │           │       └── UserShowDeviceListVO.java
+│   │       │   │           ├── knowledge
+│   │       │   │           │   ├── config
+│   │       │   │           │   │   ├── KnowledgeBaseConfig.java
+│   │       │   │           │   │   └── RAGTaskConfig.java
+│   │       │   │           │   ├── controller
+│   │       │   │           │   │   ├── KnowledgeBaseController.java
+│   │       │   │           │   │   └── KnowledgeFilesController.java
+│   │       │   │           │   ├── dao
+│   │       │   │           │   │   ├── DocumentDao.java
+│   │       │   │           │   │   └── KnowledgeBaseDao.java
+│   │       │   │           │   ├── dto
+│   │       │   │           │   │   ├── dataset
+│   │       │   │           │   │   │   └── DatasetDTO.java
+│   │       │   │           │   │   ├── document
+│   │       │   │           │   │   │   ├── ChunkDTO.java
+│   │       │   │           │   │   │   ├── DocumentDTO.java
+│   │       │   │           │   │   │   └── RetrievalDTO.java
+│   │       │   │           │   │   ├── KnowledgeBaseDTO.java
+│   │       │   │           │   │   └── KnowledgeFilesDTO.java
+│   │       │   │           │   ├── entity
+│   │       │   │           │   │   ├── DocumentEntity.java
+│   │       │   │           │   │   └── KnowledgeBaseEntity.java
+│   │       │   │           │   ├── rag
+│   │       │   │           │   │   ├── impl
+│   │       │   │           │   │   │   └── RAGFlowAdapter.java
+│   │       │   │           │   │   ├── KnowledgeBaseAdapterFactory.java
+│   │       │   │           │   │   ├── KnowledgeBaseAdapter.java
+│   │       │   │           │   │   └── RAGFlowClient.java
+│   │       │   │           │   ├── service
+│   │       │   │           │   │   ├── impl
+│   │       │   │           │   │   │   ├── KnowledgeBaseServiceImpl.java
+│   │       │   │           │   │   │   ├── KnowledgeFilesServiceImpl.java
+│   │       │   │           │   │   │   └── KnowledgeManagerServiceImpl.java
+│   │       │   │           │   │   ├── KnowledgeBaseService.java
+│   │       │   │           │   │   ├── KnowledgeFilesService.java
+│   │       │   │           │   │   └── KnowledgeManagerService.java
+│   │       │   │           │   └── task
+│   │       │   │           │       └── DocumentStatusSyncTask.java
+│   │       │   │           ├── llm
+│   │       │   │           │   └── service
+│   │       │   │           │       ├── impl
+│   │       │   │           │       │   └── OpenAIStyleLLMServiceImpl.java
+│   │       │   │           │       └── LLMService.java
+│   │       │   │           ├── model
+│   │       │   │           │   ├── controller
+│   │       │   │           │   │   ├── ModelController.java
+│   │       │   │           │   │   └── ModelProviderController.java
+│   │       │   │           │   ├── dao
+│   │       │   │           │   │   ├── ModelConfigDao.java
+│   │       │   │           │   │   └── ModelProviderDao.java
+│   │       │   │           │   ├── dto
+│   │       │   │           │   │   ├── LlmModelBasicInfoDTO.java
+│   │       │   │           │   │   ├── ModelBasicInfoDTO.java
+│   │       │   │           │   │   ├── ModelConfigBodyDTO.java
+│   │       │   │           │   │   ├── ModelConfigDTO.java
+│   │       │   │           │   │   ├── ModelProviderDTO.java
+│   │       │   │           │   │   └── VoiceDTO.java
+│   │       │   │           │   ├── entity
+│   │       │   │           │   │   ├── ModelConfigEntity.java
+│   │       │   │           │   │   └── ModelProviderEntity.java
+│   │       │   │           │   └── service
+│   │       │   │           │       ├── impl
+│   │       │   │           │       │   ├── ModelConfigServiceImpl.java
+│   │       │   │           │       │   └── ModelProviderServiceImpl.java
+│   │       │   │           │       ├── ModelConfigService.java
+│   │       │   │           │       └── ModelProviderService.java
+│   │       │   │           ├── security
+│   │       │   │           │   ├── config
+│   │       │   │           │   │   ├── FilterConfig.java
+│   │       │   │           │   │   ├── ShiroConfig.java
+│   │       │   │           │   │   └── WebMvcConfig.java
+│   │       │   │           │   ├── controller
+│   │       │   │           │   │   └── LoginController.java
+│   │       │   │           │   ├── dao
+│   │       │   │           │   │   └── SysUserTokenDao.java
+│   │       │   │           │   ├── dto
+│   │       │   │           │   │   ├── LoginDTO.java
+│   │       │   │           │   │   └── SmsVerificationDTO.java
+│   │       │   │           │   ├── entity
+│   │       │   │           │   │   └── SysUserTokenEntity.java
+│   │       │   │           │   ├── oauth2
+│   │       │   │           │   │   ├── Oauth2Filter.java
+│   │       │   │           │   │   ├── Oauth2Realm.java
+│   │       │   │           │   │   ├── Oauth2Token.java
+│   │       │   │           │   │   └── TokenGenerator.java
+│   │       │   │           │   ├── password
+│   │       │   │           │   │   ├── BCrypt.java
+│   │       │   │           │   │   ├── BCryptPasswordEncoder.java
+│   │       │   │           │   │   ├── PasswordEncoder.java
+│   │       │   │           │   │   └── PasswordUtils.java
+│   │       │   │           │   ├── secret
+│   │       │   │           │   │   ├── ServerSecretFilter.java
+│   │       │   │           │   │   └── ServerSecretToken.java
+│   │       │   │           │   ├── service
+│   │       │   │           │   │   ├── CaptchaService.java
+│   │       │   │           │   │   ├── impl
+│   │       │   │           │   │   │   ├── CaptchaServiceImpl.java
+│   │       │   │           │   │   │   ├── ShiroServiceImpl.java
+│   │       │   │           │   │   │   └── SysUserTokenServiceImpl.java
+│   │       │   │           │   │   ├── ShiroService.java
+│   │       │   │           │   │   └── SysUserTokenService.java
+│   │       │   │           │   └── user
+│   │       │   │           │       └── SecurityUser.java
+│   │       │   │           ├── sms
+│   │       │   │           │   └── service
+│   │       │   │           │       ├── imp
+│   │       │   │           │       │   └── ALiYunSmsService.java
+│   │       │   │           │       └── SmsService.java
+│   │       │   │           ├── sys
+│   │       │   │           │   ├── controller
+│   │       │   │           │   │   ├── AdminController.java
+│   │       │   │           │   │   ├── ServerSideManageController.java
+│   │       │   │           │   │   ├── SysDictDataController.java
+│   │       │   │           │   │   ├── SysDictTypeController.java
+│   │       │   │           │   │   └── SysParamsController.java
+│   │       │   │           │   ├── dao
+│   │       │   │           │   │   ├── SysDictDataDao.java
+│   │       │   │           │   │   ├── SysDictTypeDao.java
+│   │       │   │           │   │   ├── SysParamsDao.java
+│   │       │   │           │   │   └── SysUserDao.java
+│   │       │   │           │   ├── dto
+│   │       │   │           │   │   ├── AdminPageUserDTO.java
+│   │       │   │           │   │   ├── EmitSeverActionDTO.java
+│   │       │   │           │   │   ├── PasswordDTO.java
+│   │       │   │           │   │   ├── RetrievePasswordDTO.java
+│   │       │   │           │   │   ├── ServerActionPayloadDTO.java
+│   │       │   │           │   │   ├── ServerActionResponseDTO.java
+│   │       │   │           │   │   ├── SysDictDataDTO.java
+│   │       │   │           │   │   ├── SysDictTypeDTO.java
+│   │       │   │           │   │   ├── SysParamsDTO.java
+│   │       │   │           │   │   └── SysUserDTO.java
+│   │       │   │           │   ├── entity
+│   │       │   │           │   │   ├── SysDictDataEntity.java
+│   │       │   │           │   │   ├── SysDictTypeEntity.java
+│   │       │   │           │   │   ├── SysParamsEntity.java
+│   │       │   │           │   │   └── SysUserEntity.java
+│   │       │   │           │   ├── enums
+│   │       │   │           │   │   ├── ServerActionEnum.java
+│   │       │   │           │   │   ├── ServerActionResponseEnum.java
+│   │       │   │           │   │   └── SuperAdminEnum.java
+│   │       │   │           │   ├── redis
+│   │       │   │           │   │   └── SysParamsRedis.java
+│   │       │   │           │   ├── service
+│   │       │   │           │   │   ├── impl
+│   │       │   │           │   │   │   ├── SysDictDataServiceImpl.java
+│   │       │   │           │   │   │   ├── SysDictTypeServiceImpl.java
+│   │       │   │           │   │   │   ├── SysParamsServiceImpl.java
+│   │       │   │           │   │   │   ├── SysUserServiceImpl.java
+│   │       │   │           │   │   │   ├── SysUserUtilServiceImpl.java
+│   │       │   │           │   │   │   └── TokenServiceImpl.java
+│   │       │   │           │   │   ├── SysDictDataService.java
+│   │       │   │           │   │   ├── SysDictTypeService.java
+│   │       │   │           │   │   ├── SysParamsService.java
+│   │       │   │           │   │   ├── SysUserService.java
+│   │       │   │           │   │   ├── SysUserUtilService.java
+│   │       │   │           │   │   └── TokenService.java
+│   │       │   │           │   ├── utils
+│   │       │   │           │   │   ├── WebSocketClientManager.java
+│   │       │   │           │   │   ├── WebSocketTestHandler.java
+│   │       │   │           │   │   └── WebSocketValidator.java
+│   │       │   │           │   └── vo
+│   │       │   │           │       ├── AdminPageUserVO.java
+│   │       │   │           │       ├── SysDictDataItem.java
+│   │       │   │           │       ├── SysDictDataVO.java
+│   │       │   │           │       └── SysDictTypeVO.java
+│   │       │   │           ├── timbre
+│   │       │   │           │   ├── controller
+│   │       │   │           │   │   └── TimbreController.java
+│   │       │   │           │   ├── dao
+│   │       │   │           │   │   └── TimbreDao.java
+│   │       │   │           │   ├── dto
+│   │       │   │           │   │   ├── TimbreDataDTO.java
+│   │       │   │           │   │   └── TimbrePageDTO.java
+│   │       │   │           │   ├── entity
+│   │       │   │           │   │   └── TimbreEntity.java
+│   │       │   │           │   ├── service
+│   │       │   │           │   │   ├── impl
+│   │       │   │           │   │   │   └── TimbreServiceImpl.java
+│   │       │   │           │   │   └── TimbreService.java
+│   │       │   │           │   └── vo
+│   │       │   │           │       └── TimbreDetailsVO.java
+│   │       │   │           └── voiceclone
+│   │       │   │               ├── controller
+│   │       │   │               │   ├── VoiceCloneController.java
+│   │       │   │               │   └── VoiceResourceController.java
+│   │       │   │               ├── dao
+│   │       │   │               │   └── VoiceCloneDao.java
+│   │       │   │               ├── dto
+│   │       │   │               │   ├── VoiceCloneDTO.java
+│   │       │   │               │   └── VoiceCloneResponseDTO.java
+│   │       │   │               ├── entity
+│   │       │   │               │   └── VoiceCloneEntity.java
+│   │       │   │               └── service
+│   │       │   │                   ├── impl
+│   │       │   │                   │   └── VoiceCloneServiceImpl.java
+│   │       │   │                   └── VoiceCloneService.java
+│   │       │   └── resources
+│   │       │       ├── application-dev.yml
+│   │       │       ├── application.yml
+│   │       │       ├── db
+│   │       │       │   └── changelog
+│   │       │       │       ├── 202503141335.sql
+│   │       │       │       ├── 202503141346.sql
+│   │       │       │       ├── 202504082211.sql
+│   │       │       │       ├── 202504092335.sql
+│   │       │       │       ├── 202504112044.sql
+│   │       │       │       ├── 202504112058.sql
+│   │       │       │       ├── 202504151206.sql
+│   │       │       │       ├── 202504181536.sql
+│   │       │       │       ├── 202504221135.sql
+│   │       │       │       ├── 202504221555.sql
+│   │       │       │       ├── 202504251422.sql
+│   │       │       │       ├── 202504291043.sql
+│   │       │       │       ├── 202504301341.sql
+│   │       │       │       ├── 202505022134.sql
+│   │       │       │       ├── 202505081146.sql
+│   │       │       │       ├── 202505091555.sql
+│   │       │       │       ├── 202505111914.sql
+│   │       │       │       ├── 202505122348.sql
+│   │       │       │       ├── 202505142037.sql
+│   │       │       │       ├── 202505151451.sql
+│   │       │       │       ├── 202505182234.sql
+│   │       │       │       ├── 202505201744.sql
+│   │       │       │       ├── 202505271414.sql
+│   │       │       │       ├── 202505292203.sql
+│   │       │       │       ├── 202506010920.sql
+│   │       │       │       ├── 202506031639.sql
+│   │       │       │       ├── 202506032232.sql
+│   │       │       │       ├── 202506051538.sql
+│   │       │       │       ├── 202506080955.sql
+│   │       │       │       ├── 202506091720.sql
+│   │       │       │       ├── 202506161101.sql
+│   │       │       │       ├── 202506191643.sql
+│   │       │       │       ├── 202506251620.sql
+│   │       │       │       ├── 202506261637.sql
+│   │       │       │       ├── 202507031602.sql
+│   │       │       │       ├── 202507041018.sql
+│   │       │       │       ├── 202507071130.sql
+│   │       │       │       ├── 202507071530.sql
+│   │       │       │       ├── 202507081646.sql
+│   │       │       │       ├── 202507101203.sql
+│   │       │       │       ├── 202508081701.sql
+│   │       │       │       ├── 202508111734.sql
+│   │       │       │       ├── 202508131557.sql
+│   │       │       │       ├── 202508271113.sql
+│   │       │       │       ├── 202509051745.sql
+│   │       │       │       ├── 202509080922.sql
+│   │       │       │       ├── 202509081140.sql
+│   │       │       │       ├── 202509091042.sql
+│   │       │       │       ├── 202509091633.sql
+│   │       │       │       ├── 202509161610.sql
+│   │       │       │       ├── 202509161701.sql
+│   │       │       │       ├── 202509191545.sql
+│   │       │       │       ├── 202509220926.sql
+│   │       │       │       ├── 202509220958.sql
+│   │       │       │       ├── 202509221530.sql
+│   │       │       │       ├── 202510071522.sql
+│   │       │       │       ├── 202510191042.sql
+│   │       │       │       ├── 202510250956.sql
+│   │       │       │       ├── 202510251150.sql
+│   │       │       │       ├── 202511131023.sql
+│   │       │       │       ├── 202511221450.sql
+│   │       │       │       ├── 202512031517.sql
+│   │       │       │       ├── 202512041515.sql
+│   │       │       │       ├── 202512131453.sql
+│   │       │       │       ├── 202512161529.sql
+│   │       │       │       ├── 202512192245.sql
+│   │       │       │       ├── 202512221117.sql
+│   │       │       │       ├── 202512301430.sql
+│   │       │       │       ├── 202601051433.sql
+│   │       │       │       ├── 202601141645.sql
+│   │       │       │       ├── 202601231530.sql
+│   │       │       │       ├── 202601261730.sql
+│   │       │       │       ├── 202602021555.sql
+│   │       │       │       ├── 202602051017.sql
+│   │       │       │       ├── 202602051125.sql
+│   │       │       │       ├── 202602061650.sql
+│   │       │       │       ├── 202602271137.sql
+│   │       │       │       ├── 202602281000.sql
+│   │       │       │       ├── 202603091051.sql
+│   │       │       │       ├── 202603101723.sql
+│   │       │       │       ├── 202603111131.sql
+│   │       │       │       ├── 202603231037.sql
+│   │       │       │       ├── 202603311200.sql
+│   │       │       │       ├── 202604010930.sql
+│   │       │       │       ├── 202604011035.sql
+│   │       │       │       ├── 202604011545.sql
+│   │       │       │       ├── 202604161357.sql
+│   │       │       │       ├── 202604201719.sql
+│   │       │       │       ├── 202604211515.sql
+│   │       │       │       ├── 202604211700.sql
+│   │       │       │       ├── 202604300930.sql
+│   │       │       │       ├── 202605071037.sql
+│   │       │       │       ├── 202605071120.sql
+│   │       │       │       ├── 202605081008.sql
+│   │       │       │       ├── 202605121509.sql
+│   │       │       │       ├── 202605251426.sql
+│   │       │       │       ├── 202606231030.sql
+│   │       │       │       ├── 202606261131.sql
+│   │       │       │       ├── 202607011405.sql
+│   │       │       │       ├── 202607071530.sql
+│   │       │       │       ├── 202607101200.sql
+│   │       │       │       └── db.changelog-master.yaml
+│   │       │       ├── i18n
+│   │       │       │   ├── messages_de_DE.properties
+│   │       │       │   ├── messages_en_US.properties
+│   │       │       │   ├── messages.properties
+│   │       │       │   ├── messages_pt_BR.properties
+│   │       │       │   ├── messages_vi_VN.properties
+│   │       │       │   ├── messages_zh_CN.properties
+│   │       │       │   ├── messages_zh_TW.properties
+│   │       │       │   ├── validation_de_DE.properties
+│   │       │       │   ├── validation_en_US.properties
+│   │       │       │   ├── validation.properties
+│   │       │       │   ├── validation_pt_BR.properties
+│   │       │       │   ├── validation_vi_VN.properties
+│   │       │       │   ├── validation_zh_CN.properties
+│   │       │       │   └── validation_zh_TW.properties
+│   │       │       ├── logback-spring.xml
+│   │       │       ├── lua
+│   │       │       │   ├── emptyAll.lua
+│   │       │       │   └── getKeyOrCreate.lua
+│   │       │       └── mapper
+│   │       │           ├── agent
+│   │       │           │   ├── AgentCorrectWordMappingDao.xml
+│   │       │           │   ├── AgentDao.xml
+│   │       │           │   ├── AgentPluginMappingMapper.xml
+│   │       │           │   ├── AgentSnapshotDao.xml
+│   │       │           │   ├── AgentTagDao.xml
+│   │       │           │   ├── AgentTagRelationDao.xml
+│   │       │           │   ├── AgentTemplateMapper.xml
+│   │       │           │   └── AiAgentChatHistoryDao.xml
+│   │       │           ├── correctword
+│   │       │           │   └── CorrectWordItemDao.xml
+│   │       │           ├── device
+│   │       │           │   ├── DeviceAddressBookDao.xml
+│   │       │           │   └── DeviceDao.xml
+│   │       │           ├── knowledge
+│   │       │           │   └── KnowledgeBaseDao.xml
+│   │       │           ├── model
+│   │       │           │   ├── ModelConfigDao.xml
+│   │       │           │   └── ModelProviderDao.xml
+│   │       │           ├── security
+│   │       │           │   └── SysUserTokenDao.xml
+│   │       │           ├── sys
+│   │       │           │   ├── SysDictDataDao.xml
+│   │       │           │   ├── SysDictTypeDao.xml
+│   │       │           │   ├── SysParamsDao.xml
+│   │       │           │   └── SysUserDao.xml
+│   │       │           └── voiceclone
+│   │       │               └── VoiceCloneDao.xml
+│   │       └── test
+│   │           ├── java
+│   │           │   └── xiaozhi
+│   │           │       ├── common
+│   │           │       │   ├── redis
+│   │           │       │   │   └── RedisSerializationTest.java
+│   │           │       │   ├── service
+│   │           │       │   │   └── impl
+│   │           │       │   │       └── BaseServiceImplTest.java
+│   │           │       │   └── utils
+│   │           │       │       ├── AESUtilsTest.java
+│   │           │       │       └── JsonUtilsTest.java
+│   │           │       └── modules
+│   │           │           ├── agent
+│   │           │           │   ├── dto
+│   │           │           │   │   └── AgentUpdateDTOTest.java
+│   │           │           │   ├── service
+│   │           │           │   │   └── impl
+│   │           │           │   │       ├── AgentSnapshotRedactionRunnerTest.java
+│   │           │           │   │       └── AgentSnapshotServiceImplTest.java
+│   │           │           │   └── typehandler
+│   │           │           │       └── ContextProviderListTypeHandlerTest.java
+│   │           │           ├── config
+│   │           │           │   └── service
+│   │           │           │       └── impl
+│   │           │           │           └── ConfigServiceImplTest.java
+│   │           │           ├── device
+│   │           │           │   ├── controller
+│   │           │           │   │   └── DeviceControllerTest.java
+│   │           │           │   ├── DeviceTest.java
+│   │           │           │   └── service
+│   │           │           │       └── impl
+│   │           │           │           ├── DeviceAddressBookServiceImplTest.java
+│   │           │           │           ├── DeviceAutoUpdateTest.java
+│   │           │           │           ├── DeviceTimeSerializationTest.java
+│   │           │           │           └── MqttGatewayAuthorizationTest.java
+│   │           │           ├── security
+│   │           │           │   └── config
+│   │           │           │       └── ShiroConfigTest.java
+│   │           │           ├── sys
+│   │           │           │   ├── loginControllerTest.java
+│   │           │           │   └── service
+│   │           │           │       └── impl
+│   │           │           │           ├── SysDictDataServiceImplTest.java
+│   │           │           │           └── SysParamsServiceImplTest.java
+│   │           │           └── timbre
+│   │           │               └── service
+│   │           │                   └── impl
+│   │           │                       └── TimbreServiceImplTest.java
+│   │           └── resources
+│   │               └── application.yml
+│   ├── manager-mobile
+│   │   ├── env
+│   │   ├── eslint.config.mjs
+│   │   ├── favicon.ico
+│   │   ├── index.html
+│   │   ├── LICENSE
+│   │   ├── manifest.config.ts
+│   │   ├── package.json
+│   │   ├── pages.config.ts
+│   │   ├── patches
+│   │   │   └── @dcloudio__uni-h5.patch
+│   │   ├── pnpm-lock.yaml
+│   │   ├── pnpm-workspace.yaml
+│   │   ├── README.md
+│   │   ├── scripts
+│   │   │   └── postupgrade.js
+│   │   ├── src
+│   │   │   ├── api
+│   │   │   │   ├── agent
+│   │   │   │   │   ├── agent.ts
+│   │   │   │   │   └── types.ts
+│   │   │   │   ├── auth.ts
+│   │   │   │   ├── chat-history
+│   │   │   │   │   ├── chat-history.ts
+│   │   │   │   │   ├── index.ts
+│   │   │   │   │   └── types.ts
+│   │   │   │   ├── device
+│   │   │   │   │   ├── device.ts
+│   │   │   │   │   ├── index.ts
+│   │   │   │   │   └── types.ts
+│   │   │   │   └── voiceprint
+│   │   │   │       ├── index.ts
+│   │   │   │       ├── types.ts
+│   │   │   │       └── voiceprint.ts
+│   │   │   ├── App.vue
+│   │   │   ├── components
+│   │   │   │   └── custom-tabs
+│   │   │   │       └── index.vue
+│   │   │   ├── env.d.ts
+│   │   │   ├── hooks
+│   │   │   │   ├── usePageAuth.ts
+│   │   │   │   ├── useRequest.ts
+│   │   │   │   └── useUpload.ts
+│   │   │   ├── http
+│   │   │   │   ├── README.md
+│   │   │   │   └── request
+│   │   │   │       ├── alova.ts
+│   │   │   │       ├── enum.ts
+│   │   │   │       └── types.ts
+│   │   │   ├── i18n
+│   │   │   │   ├── de.ts
+│   │   │   │   ├── en.ts
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── pt_BR.ts
+│   │   │   │   ├── vi.ts
+│   │   │   │   ├── zh_CN.ts
+│   │   │   │   └── zh_TW.ts
+│   │   │   ├── layouts
+│   │   │   │   ├── default.vue
+│   │   │   │   ├── fg-tabbar
+│   │   │   │   │   ├── fg-tabbar.vue
+│   │   │   │   │   ├── tabbarList.ts
+│   │   │   │   │   ├── tabbar.md
+│   │   │   │   │   └── tabbar.ts
+│   │   │   │   └── tabbar.vue
+│   │   │   ├── main.ts
+│   │   │   ├── manifest.json
+│   │   │   ├── pages
+│   │   │   │   ├── agent
+│   │   │   │   │   ├── components
+│   │   │   │   │   │   ├── agentSnapshotContracts.test.mjs
+│   │   │   │   │   │   ├── AgentSnapshotPanel.vue
+│   │   │   │   │   │   ├── agentSnapshotUtils.mjs
+│   │   │   │   │   │   └── agentSnapshotUtils.test.mjs
+│   │   │   │   │   ├── edit.vue
+│   │   │   │   │   ├── index.vue
+│   │   │   │   │   ├── provider.vue
+│   │   │   │   │   ├── speedPitch.vue
+│   │   │   │   │   └── tools.vue
+│   │   │   │   ├── chat-history
+│   │   │   │   │   ├── detail.vue
+│   │   │   │   │   └── index.vue
+│   │   │   │   ├── device
+│   │   │   │   │   └── index.vue
+│   │   │   │   ├── device-config
+│   │   │   │   │   ├── components
+│   │   │   │   │   │   ├── ultrasonic-config.vue
+│   │   │   │   │   │   ├── wifi-config.vue
+│   │   │   │   │   │   └── wifi-selector.vue
+│   │   │   │   │   └── index.vue
+│   │   │   │   ├── forgot-password
+│   │   │   │   │   └── index.vue
+│   │   │   │   ├── index
+│   │   │   │   │   └── index.vue
+│   │   │   │   ├── login
+│   │   │   │   │   ├── index.vue
+│   │   │   │   │   ├── privacy-policy-en.vue
+│   │   │   │   │   ├── privacy-policy-zh.vue
+│   │   │   │   │   ├── user-agreement-en.vue
+│   │   │   │   │   └── user-agreement-zh.vue
+│   │   │   │   ├── register
+│   │   │   │   │   └── index.vue
+│   │   │   │   ├── settings
+│   │   │   │   │   └── index.vue
+│   │   │   │   └── voiceprint
+│   │   │   │       └── index.vue
+│   │   │   ├── pages.json
+│   │   │   ├── pages-sub
+│   │   │   │   └── demo
+│   │   │   │       └── index.vue
+│   │   │   ├── router
+│   │   │   │   └── interceptor.ts
+│   │   │   ├── static
+│   │   │   │   ├── app
+│   │   │   │   │   └── icons
+│   │   │   │   │       ├── 1024x1024.png
+│   │   │   │   │       ├── 120x120.png
+│   │   │   │   │       ├── 144x144.png
+│   │   │   │   │       ├── 152x152.png
+│   │   │   │   │       ├── 167x167.png
+│   │   │   │   │       ├── 180x180.png
+│   │   │   │   │       ├── 192x192.png
+│   │   │   │   │       ├── 20x20.png
+│   │   │   │   │       ├── 29x29.png
+│   │   │   │   │       ├── 40x40.png
+│   │   │   │   │       ├── 58x58.png
+│   │   │   │   │       ├── 60x60.png
+│   │   │   │   │       ├── 72x72.png
+│   │   │   │   │       ├── 76x76.png
+│   │   │   │   │       ├── 80x80.png
+│   │   │   │   │       ├── 87x87.png
+│   │   │   │   │       └── 96x96.png
+│   │   │   │   ├── images
+│   │   │   │   │   ├── default-avatar.png
+│   │   │   │   │   └── home
+│   │   │   │   │       └── main-top-bg.png
+│   │   │   │   ├── logo.png
+│   │   │   │   ├── logo.svg
+│   │   │   │   └── tabbar
+│   │   │   │       ├── chat_activate.png
+│   │   │   │       ├── chat.png
+│   │   │   │       ├── device_activate.png
+│   │   │   │       ├── device.png
+│   │   │   │       ├── exampleHL.png
+│   │   │   │       ├── example.png
+│   │   │   │       ├── homeHL.png
+│   │   │   │       ├── home.png
+│   │   │   │       ├── microphone_activate.png
+│   │   │   │       ├── microphone.png
+│   │   │   │       ├── network_activate.png
+│   │   │   │       ├── network.png
+│   │   │   │       ├── personalHL.png
+│   │   │   │       ├── personal.png
+│   │   │   │       ├── robot_activate.png
+│   │   │   │       ├── robot.png
+│   │   │   │       ├── system_activate.png
+│   │   │   │       └── system.png
+│   │   │   ├── store
+│   │   │   │   ├── config.ts
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── lang.ts
+│   │   │   │   ├── plugin.ts
+│   │   │   │   ├── provider.ts
+│   │   │   │   ├── speedPitch.ts
+│   │   │   │   └── user.ts
+│   │   │   ├── style
+│   │   │   │   ├── iconfont.css
+│   │   │   │   └── index.scss
+│   │   │   ├── typings.d.ts
+│   │   │   ├── typings.ts
+│   │   │   ├── uni.scss
+│   │   │   ├── utils
+│   │   │   │   ├── index.ts
+│   │   │   │   ├── platform.ts
+│   │   │   │   ├── toast.ts
+│   │   │   │   └── uploadFile.ts
+│   │   │   └── wot-design-uni.d.ts
+│   │   ├── tsconfig.json
+│   │   ├── uno.config.ts
+│   │   ├── unpackage
+│   │   │   └── res
+│   │   │       └── icons
+│   │   │           ├── 1024x1024.png
+│   │   │           ├── 120x120.png
+│   │   │           ├── 144x144.png
+│   │   │           ├── 152x152.png
+│   │   │           ├── 167x167.png
+│   │   │           ├── 180x180.png
+│   │   │           ├── 192x192.png
+│   │   │           ├── 20x20.png
+│   │   │           ├── 29x29.png
+│   │   │           ├── 40x40.png
+│   │   │           ├── 58x58.png
+│   │   │           ├── 60x60.png
+│   │   │           ├── 72x72.png
+│   │   │           ├── 76x76.png
+│   │   │           ├── 80x80.png
+│   │   │           ├── 87x87.png
+│   │   │           └── 96x96.png
+│   │   └── vite.config.ts
+│   ├── manager-web
+│   │   ├── babel.config.js
+│   │   ├── jsconfig.json
+│   │   ├── package.json
+│   │   ├── package-lock.json
+│   │   ├── public
+│   │   │   ├── favicon.ico
+│   │   │   ├── generator
+│   │   │   │   ├── assets
+│   │   │   │   │   ├── ft_render-ByO_jG18.js
+│   │   │   │   │   ├── index-B3ns2K1c.css
+│   │   │   │   │   └── index-Guo1hQ-y.js
+│   │   │   │   ├── favicon.ico
+│   │   │   │   ├── index.html
+│   │   │   │   ├── README.md
+│   │   │   │   ├── static
+│   │   │   │   │   ├── charsets
+│   │   │   │   │   │   ├── deepseek.txt
+│   │   │   │   │   │   ├── gb2312.txt
+│   │   │   │   │   │   ├── latin1.txt
+│   │   │   │   │   │   └── qwen18409.txt
+│   │   │   │   │   ├── emojis
+│   │   │   │   │   │   ├── noto-emoji_128
+│   │   │   │   │   │   │   ├── angry.gif
+│   │   │   │   │   │   │   ├── confident.gif
+│   │   │   │   │   │   │   ├── confused.gif
+│   │   │   │   │   │   │   ├── cool.gif
+│   │   │   │   │   │   │   ├── crying.gif
+│   │   │   │   │   │   │   ├── delicious.gif
+│   │   │   │   │   │   │   ├── embarrassed.gif
+│   │   │   │   │   │   │   ├── funny.gif
+│   │   │   │   │   │   │   ├── happy.gif
+│   │   │   │   │   │   │   ├── kissy.gif
+│   │   │   │   │   │   │   ├── laughing.gif
+│   │   │   │   │   │   │   ├── loving.gif
+│   │   │   │   │   │   │   ├── neutral.gif
+│   │   │   │   │   │   │   ├── relaxed.gif
+│   │   │   │   │   │   │   ├── sad.gif
+│   │   │   │   │   │   │   ├── shocked.gif
+│   │   │   │   │   │   │   ├── silly.gif
+│   │   │   │   │   │   │   ├── sleepy.gif
+│   │   │   │   │   │   │   ├── surprised.gif
+│   │   │   │   │   │   │   ├── thinking.gif
+│   │   │   │   │   │   │   └── winking.gif
+│   │   │   │   │   │   ├── noto-emoji_64
+│   │   │   │   │   │   │   ├── angry.gif
+│   │   │   │   │   │   │   ├── confident.gif
+│   │   │   │   │   │   │   ├── confused.gif
+│   │   │   │   │   │   │   ├── cool.gif
+│   │   │   │   │   │   │   ├── crying.gif
+│   │   │   │   │   │   │   ├── delicious.gif
+│   │   │   │   │   │   │   ├── embarrassed.gif
+│   │   │   │   │   │   │   ├── funny.gif
+│   │   │   │   │   │   │   ├── happy.gif
+│   │   │   │   │   │   │   ├── kissy.gif
+│   │   │   │   │   │   │   ├── laughing.gif
+│   │   │   │   │   │   │   ├── loving.gif
+│   │   │   │   │   │   │   ├── neutral.gif
+│   │   │   │   │   │   │   ├── relaxed.gif
+│   │   │   │   │   │   │   ├── sad.gif
+│   │   │   │   │   │   │   ├── shocked.gif
+│   │   │   │   │   │   │   ├── silly.gif
+│   │   │   │   │   │   │   ├── sleepy.gif
+│   │   │   │   │   │   │   ├── surprised.gif
+│   │   │   │   │   │   │   ├── thinking.gif
+│   │   │   │   │   │   │   └── winking.gif
+│   │   │   │   │   │   ├── twemoji32
+│   │   │   │   │   │   │   ├── angry.png
+│   │   │   │   │   │   │   ├── confident.png
+│   │   │   │   │   │   │   ├── confused.png
+│   │   │   │   │   │   │   ├── cool.png
+│   │   │   │   │   │   │   ├── crying.png
+│   │   │   │   │   │   │   ├── delicious.png
+│   │   │   │   │   │   │   ├── embarrassed.png
+│   │   │   │   │   │   │   ├── funny.png
+│   │   │   │   │   │   │   ├── happy.png
+│   │   │   │   │   │   │   ├── kissy.png
+│   │   │   │   │   │   │   ├── laughing.png
+│   │   │   │   │   │   │   ├── loving.png
+│   │   │   │   │   │   │   ├── neutral.png
+│   │   │   │   │   │   │   ├── relaxed.png
+│   │   │   │   │   │   │   ├── sad.png
+│   │   │   │   │   │   │   ├── shocked.png
+│   │   │   │   │   │   │   ├── silly.png
+│   │   │   │   │   │   │   ├── sleepy.png
+│   │   │   │   │   │   │   ├── surprised.png
+│   │   │   │   │   │   │   ├── thinking.png
+│   │   │   │   │   │   │   └── winking.png
+│   │   │   │   │   │   └── twemoji64
+│   │   │   │   │   │       ├── angry.png
+│   │   │   │   │   │       ├── confident.png
+│   │   │   │   │   │       ├── confused.png
+│   │   │   │   │   │       ├── cool.png
+│   │   │   │   │   │       ├── crying.png
+│   │   │   │   │   │       ├── delicious.png
+│   │   │   │   │   │       ├── embarrassed.png
+│   │   │   │   │   │       ├── funny.png
+│   │   │   │   │   │       ├── happy.png
+│   │   │   │   │   │       ├── kissy.png
+│   │   │   │   │   │       ├── laughing.png
+│   │   │   │   │   │       ├── loving.png
+│   │   │   │   │   │       ├── neutral.png
+│   │   │   │   │   │       ├── relaxed.png
+│   │   │   │   │   │       ├── sad.png
+│   │   │   │   │   │       ├── shocked.png
+│   │   │   │   │   │       ├── silly.png
+│   │   │   │   │   │       ├── sleepy.png
+│   │   │   │   │   │       ├── surprised.png
+│   │   │   │   │   │       ├── thinking.png
+│   │   │   │   │   │       └── winking.png
+│   │   │   │   │   ├── fonts
+│   │   │   │   │   │   ├── font_noto_qwen_14_1.bin
+│   │   │   │   │   │   ├── font_noto_qwen_16_4.bin
+│   │   │   │   │   │   ├── font_noto_qwen_20_4.bin
+│   │   │   │   │   │   ├── font_noto_qwen_30_4.bin
+│   │   │   │   │   │   ├── font_puhui_deepseek_14_1.bin
+│   │   │   │   │   │   ├── font_puhui_deepseek_16_4.bin
+│   │   │   │   │   │   ├── font_puhui_deepseek_20_4.bin
+│   │   │   │   │   │   ├── font_puhui_deepseek_30_4.bin
+│   │   │   │   │   │   ├── noto_qwen.ttf
+│   │   │   │   │   │   └── puhui_deepseek.ttf
+│   │   │   │   │   ├── multinet_model
+│   │   │   │   │   │   ├── fst
+│   │   │   │   │   │   │   ├── commands_cn.txt
+│   │   │   │   │   │   │   └── commands_en.txt
+│   │   │   │   │   │   ├── mn6_cn
+│   │   │   │   │   │   │   ├── mn6_data
+│   │   │   │   │   │   │   ├── mn6_index
+│   │   │   │   │   │   │   ├── _MODEL_INFO_
+│   │   │   │   │   │   │   └── vocab
+│   │   │   │   │   │   ├── mn6_en
+│   │   │   │   │   │   │   ├── mn6_data
+│   │   │   │   │   │   │   ├── mn6_index
+│   │   │   │   │   │   │   ├── _MODEL_INFO_
+│   │   │   │   │   │   │   └── vocab
+│   │   │   │   │   │   ├── mn7_cn
+│   │   │   │   │   │   │   ├── mn7_data
+│   │   │   │   │   │   │   ├── mn7_index
+│   │   │   │   │   │   │   ├── _MODEL_INFO_
+│   │   │   │   │   │   │   └── vocab
+│   │   │   │   │   │   └── mn7_en
+│   │   │   │   │   │       ├── mn7_data
+│   │   │   │   │   │       ├── mn7_index
+│   │   │   │   │   │       ├── _MODEL_INFO_
+│   │   │   │   │   │       └── vocab
+│   │   │   │   │   ├── README.md
+│   │   │   │   │   └── wakenet_model
+│   │   │   │   │       ├── wn7q8_xiaoaitongxue
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn7q8_data
+│   │   │   │   │       │   └── wn7q8_index
+│   │   │   │   │       ├── wn7_xiaoaitongxue
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn7_data
+│   │   │   │   │       │   └── wn7_index
+│   │   │   │   │       ├── wn8_alexa
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn8_data
+│   │   │   │   │       │   └── wn8_index
+│   │   │   │   │       ├── wn8_hiesp
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn8_data
+│   │   │   │   │       │   └── wn8_index
+│   │   │   │   │       ├── wn8_hilexin
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn8_data
+│   │   │   │   │       │   └── wn8_index
+│   │   │   │   │       ├── wn9_alexa
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_astrolabe_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_bluechip_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_computer_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_customword
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_hai1xiao3ou1_tts3
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_haixiaowu_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_heyily_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_heyivy_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_heyprinter_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_heywanda_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_heywillow_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_hiandy_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_hiesp
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_hifairy_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_hijason_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_hijolly_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_hijoy_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_hilexin
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_hilili_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_himfive
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_himiaomiao_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_histackchan_tts3
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_hitelly_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_hiwalle_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_hixiaoxing_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_jarvis_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_linaiban_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_miaomiaotongxue_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_mycroft_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_ni3hao3xiao3mai4_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_ni3hao3xiao3rui4_tts3
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_nihaobaiying_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_nihaodongdong_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_nihaomiaoban_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_nihaoxiaoan_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_nihaoxiaoxin_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_nihaoxiaoyi_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_nihaoxiaozhi
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_nihaoxiaozhi_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9s_alexa
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9s_hiesp
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9s_hijason
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9s_hilexin
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9s_nihaoxiaozhi
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_sophia_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_sophia_tts_v1
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_xiao3feng1xiao3feng1_tts3
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_xiao3jia1xiao3jia1_tts3
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_xiaoaitongxue
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_xiaobinxiaobin_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_xiaojianxiaojian_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_xiaokangtongxue_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_xiaolongxiaolong_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_xiaoluxiaolu_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_xiaomeitongxue_tts
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_xiaomingtongxue_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_xiaosurou_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_xiaotexiaote_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       ├── wn9_xiaoyaxiaoya_tts2
+│   │   │   │   │       │   ├── _MODEL_INFO_
+│   │   │   │   │       │   ├── wn9_data
+│   │   │   │   │       │   └── wn9_index
+│   │   │   │   │       └── wn9_xiaoyutongxue_tts2
+│   │   │   │   │           ├── _MODEL_INFO_
+│   │   │   │   │           ├── wn9_data
+│   │   │   │   │           └── wn9_index
+│   │   │   │   └── workers
+│   │   │   │       ├── gif.js
+│   │   │   │       └── gif.worker.js
+│   │   │   ├── index.html
+│   │   │   ├── offline.html
+│   │   │   ├── privacy-policy-en.html
+│   │   │   ├── privacy-policy.html
+│   │   │   ├── user-agreement-en.html
+│   │   │   └── user-agreement.html
+│   │   ├── README.md
+│   │   ├── scripts
+│   │   │   └── check-i18n.js
+│   │   ├── src
+│   │   │   ├── apis
+│   │   │   │   ├── api.js
+│   │   │   │   ├── httpRequest.js
+│   │   │   │   └── module
+│   │   │   │       ├── addressBook.js
+│   │   │   │       ├── admin.js
+│   │   │   │       ├── agent.js
+│   │   │   │       ├── agentSnapshotApi.test.mjs
+│   │   │   │       ├── correctWord.js
+│   │   │   │       ├── device.js
+│   │   │   │       ├── dict.js
+│   │   │   │       ├── knowledgeBase.js
+│   │   │   │       ├── model.js
+│   │   │   │       ├── ota.js
+│   │   │   │       ├── timbre.js
+│   │   │   │       ├── user.js
+│   │   │   │       ├── voiceClone.js
+│   │   │   │       └── voiceResource.js
+│   │   │   ├── App.vue
+│   │   │   ├── assets
+│   │   │   │   ├── device-avatars
+│   │   │   │   │   ├── xiaozhi-logo10.png
+│   │   │   │   │   ├── xiaozhi-logo11.png
+│   │   │   │   │   ├── xiaozhi-logo12.png
+│   │   │   │   │   ├── xiaozhi-logo13.png
+│   │   │   │   │   ├── xiaozhi-logo14.png
+│   │   │   │   │   ├── xiaozhi-logo15.png
+│   │   │   │   │   ├── xiaozhi-logo16.png
+│   │   │   │   │   ├── xiaozhi-logo1.png
+│   │   │   │   │   ├── xiaozhi-logo2.png
+│   │   │   │   │   ├── xiaozhi-logo3.png
+│   │   │   │   │   ├── xiaozhi-logo4.png
+│   │   │   │   │   ├── xiaozhi-logo5.png
+│   │   │   │   │   ├── xiaozhi-logo6.png
+│   │   │   │   │   ├── xiaozhi-logo7.png
+│   │   │   │   │   ├── xiaozhi-logo8.png
+│   │   │   │   │   └── xiaozhi-logo9.png
+│   │   │   │   ├── header
+│   │   │   │   │   ├── address_book.png
+│   │   │   │   │   ├── knowledge_base.png
+│   │   │   │   │   ├── model_config.png
+│   │   │   │   │   ├── param_management.png
+│   │   │   │   │   ├── robot.png
+│   │   │   │   │   ├── user_management.png
+│   │   │   │   │   └── voice.png
+│   │   │   │   ├── home
+│   │   │   │   │   ├── avatar.png
+│   │   │   │   │   ├── close.png
+│   │   │   │   │   ├── delete.png
+│   │   │   │   │   ├── equipment.png
+│   │   │   │   │   ├── info.png
+│   │   │   │   │   ├── main-top-bg.png
+│   │   │   │   │   ├── red-info.png
+│   │   │   │   │   ├── search.png
+│   │   │   │   │   └── setting-user.png
+│   │   │   │   ├── knowledge-base
+│   │   │   │   │   ├── default.png
+│   │   │   │   │   ├── docX.png
+│   │   │   │   │   ├── level.png
+│   │   │   │   │   ├── MD.png
+│   │   │   │   │   ├── pdf.png
+│   │   │   │   │   ├── star.png
+│   │   │   │   │   ├── txt.png
+│   │   │   │   │   └── xlsx.png
+│   │   │   │   ├── login
+│   │   │   │   │   ├── down-arrow.png
+│   │   │   │   │   ├── hi.png
+│   │   │   │   │   ├── login-person.png
+│   │   │   │   │   ├── password.png
+│   │   │   │   │   ├── phone.png
+│   │   │   │   │   ├── register-person.png
+│   │   │   │   │   ├── shield.png
+│   │   │   │   │   └── username.png
+│   │   │   │   ├── model
+│   │   │   │   │   ├── inner_conf.png
+│   │   │   │   │   ├── model.png
+│   │   │   │   │   └── output_conf.png
+│   │   │   │   ├── setting
+│   │   │   │   │   ├── addressBook.png
+│   │   │   │   │   ├── agent.png
+│   │   │   │   │   ├── asr.png
+│   │   │   │   │   ├── knowledgeBase.png
+│   │   │   │   │   ├── mcpAccessPoint.png
+│   │   │   │   │   ├── menu.png
+│   │   │   │   │   ├── vad.png
+│   │   │   │   │   ├── voiceclone.png
+│   │   │   │   │   └── voiceprint.png
+│   │   │   │   ├── user-avatar1.png
+│   │   │   │   ├── user-avatar2.png
+│   │   │   │   ├── user-avatar3.png
+│   │   │   │   ├── user-avatar4.png
+│   │   │   │   ├── user-avatar5.png
+│   │   │   │   ├── xiaozhi-ai_de.png
+│   │   │   │   ├── xiaozhi-ai_en.png
+│   │   │   │   ├── xiaozhi-ai.png
+│   │   │   │   ├── xiaozhi-ai_vi.png
+│   │   │   │   ├── xiaozhi-ai_zh_CN.png
+│   │   │   │   ├── xiaozhi-ai_zh_TW.png
+│   │   │   │   └── xiaozhi-logo.png
+│   │   │   ├── components
+│   │   │   │   ├── AddDeviceDialog.vue
+│   │   │   │   ├── AddModelDialog.vue
+│   │   │   │   ├── AddressBookDialog.vue
+│   │   │   │   ├── AddWisdomBodyDialog.vue
+│   │   │   │   ├── AgentSnapshotDialog.vue
+│   │   │   │   ├── agentSnapshotDisplayUtils.mjs
+│   │   │   │   ├── agentSnapshotDisplayUtils.test.mjs
+│   │   │   │   ├── AudioPlayer.vue
+│   │   │   │   ├── CacheViewer.vue
+│   │   │   │   ├── ChangePasswordDialog.vue
+│   │   │   │   ├── ChatHistoryDialog.vue
+│   │   │   │   ├── ContextProviderDialog.vue
+│   │   │   │   ├── CustomButton.vue
+│   │   │   │   ├── CustomDialog.vue
+│   │   │   │   ├── CustomPagination.vue
+│   │   │   │   ├── CustomTable.vue
+│   │   │   │   ├── DeviceItem.vue
+│   │   │   │   ├── DictDataDialog.vue
+│   │   │   │   ├── DictTypeDialog.vue
+│   │   │   │   ├── EditVoiceDialog.vue
+│   │   │   │   ├── FirmwareDialog.vue
+│   │   │   │   ├── FunctionDialog.vue
+│   │   │   │   ├── HeaderBar.vue
+│   │   │   │   ├── KnowledgeBaseDialog.vue
+│   │   │   │   ├── MacAddressMask.vue
+│   │   │   │   ├── ManualAddDeviceDialog.vue
+│   │   │   │   ├── ManualIcon.vue
+│   │   │   │   ├── ModelEditDialog.vue
+│   │   │   │   ├── ParamDialog.vue
+│   │   │   │   ├── ProviderDialog.vue
+│   │   │   │   ├── ReplacementWordDialog.vue
+│   │   │   │   ├── TtsAdvancedSettings.vue
+│   │   │   │   ├── TtsModel.vue
+│   │   │   │   ├── VersionFooter.vue
+│   │   │   │   ├── ViewPasswordDialog.vue
+│   │   │   │   ├── VoiceCloneDialog.vue
+│   │   │   │   ├── VoicePrintDialog.vue
+│   │   │   │   └── VoiceResourceDialog.vue
+│   │   │   ├── i18n
+│   │   │   │   ├── de.js
+│   │   │   │   ├── en.js
+│   │   │   │   ├── index.js
+│   │   │   │   ├── pt_BR.js
+│   │   │   │   ├── vi.js
+│   │   │   │   ├── zh_CN.js
+│   │   │   │   └── zh_TW.js
+│   │   │   ├── main.js
+│   │   │   ├── registerServiceWorker.js
+│   │   │   ├── router
+│   │   │   │   └── index.js
+│   │   │   ├── service-worker.js
+│   │   │   ├── store
+│   │   │   │   └── index.js
+│   │   │   ├── styles
+│   │   │   │   └── global.scss
+│   │   │   ├── utils
+│   │   │   │   ├── cacheViewer.js
+│   │   │   │   ├── constant.js
+│   │   │   │   ├── date.js
+│   │   │   │   ├── deviceTime.mjs
+│   │   │   │   ├── featureManager.js
+│   │   │   │   ├── format.js
+│   │   │   │   └── index.js
+│   │   │   └── views
+│   │   │       ├── AddressBookManagement.vue
+│   │   │       ├── AgentTemplateManagement.vue
+│   │   │       ├── auth.scss
+│   │   │       ├── DeviceManagement.vue
+│   │   │       ├── DictManagement.vue
+│   │   │       ├── FeatureManagement.vue
+│   │   │       ├── home.vue
+│   │   │       ├── KnowledgeBaseItem.vue
+│   │   │       ├── KnowledgeBaseManagement.vue
+│   │   │       ├── login.vue
+│   │   │       ├── ModelConfig.vue
+│   │   │       ├── OtaManagement.vue
+│   │   │       ├── ParamsManagement.vue
+│   │   │       ├── ProviderManagement.vue
+│   │   │       ├── register.vue
+│   │   │       ├── ReplacementWordManagement.vue
+│   │   │       ├── retrievePassword.vue
+│   │   │       ├── roleConfig.vue
+│   │   │       ├── ServerSideManager.vue
+│   │   │       ├── TemplateQuickConfig.vue
+│   │   │       ├── UserManagement.vue
+│   │   │       ├── VoiceCloneManagement.vue
+│   │   │       ├── VoicePrint.vue
+│   │   │       └── VoiceResourceManagement.vue
+│   │   ├── tests
+│   │   │   └── deviceTime.test.mjs
+│   │   └── vue.config.js
+│   ├── README_en.md
+│   ├── README.md
+│   └── xiaozhi-server
+│       ├── agent-base-prompt.txt
+│       ├── app.py
+│       ├── config
+│       │   ├── assets
+│       │   │   ├── bind_code
+│       │   │   │   ├── 0.wav
+│       │   │   │   ├── 1.wav
+│       │   │   │   ├── 2.wav
+│       │   │   │   ├── 3.wav
+│       │   │   │   ├── 4.wav
+│       │   │   │   ├── 5.wav
+│       │   │   │   ├── 6.wav
+│       │   │   │   ├── 7.wav
+│       │   │   │   ├── 8.wav
+│       │   │   │   └── 9.wav
+│       │   │   ├── bind_code.wav
+│       │   │   ├── bind_not_found.wav
+│       │   │   ├── max_output_size.wav
+│       │   │   ├── tts_notify.mp3
+│       │   │   ├── wakeup_words_short.wav
+│       │   │   └── wakeup_words.wav
+│       │   ├── config_loader.py
+│       │   ├── logger.py
+│       │   ├── manage_api_client.py
+│       │   └── settings.py
+│       ├── config_from_api.yaml
+│       ├── config.yaml
+│       ├── core
+│       │   ├── api
+│       │   │   ├── base_handler.py
+│       │   │   ├── ota_handler.py
+│       │   │   └── vision_handler.py
+│       │   ├── auth.py
+│       │   ├── connection.py
+│       │   ├── handle
+│       │   │   ├── abortHandle.py
+│       │   │   ├── helloHandle.py
+│       │   │   ├── intentHandler.py
+│       │   │   ├── receiveAudioHandle.py
+│       │   │   ├── reportHandle.py
+│       │   │   ├── sendAudioHandle.py
+│       │   │   ├── textHandle.py
+│       │   │   ├── textHandler
+│       │   │   │   ├── abortMessageHandler.py
+│       │   │   │   ├── helloMessageHandler.py
+│       │   │   │   ├── iotMessageHandler.py
+│       │   │   │   ├── listenMessageHandler.py
+│       │   │   │   ├── mcpMessageHandler.py
+│       │   │   │   ├── pingMessageHandler.py
+│       │   │   │   └── serverMessageHandler.py
+│       │   │   ├── textMessageHandler.py
+│       │   │   ├── textMessageHandlerRegistry.py
+│       │   │   ├── textMessageProcessor.py
+│       │   │   └── textMessageType.py
+│       │   ├── http_server.py
+│       │   ├── providers
+│       │   │   ├── asr
+│       │   │   │   ├── aliyunbl_stream.py
+│       │   │   │   ├── aliyun.py
+│       │   │   │   ├── aliyun_stream.py
+│       │   │   │   ├── baidu.py
+│       │   │   │   ├── base.py
+│       │   │   │   ├── doubao.py
+│       │   │   │   ├── doubao_stream.py
+│       │   │   │   ├── dto
+│       │   │   │   │   └── dto.py
+│       │   │   │   ├── fun_local.py
+│       │   │   │   ├── fun_server.py
+│       │   │   │   ├── openai.py
+│       │   │   │   ├── qwen3_asr_flash.py
+│       │   │   │   ├── sherpa_onnx_local.py
+│       │   │   │   ├── tencent.py
+│       │   │   │   ├── utils.py
+│       │   │   │   ├── vosk.py
+│       │   │   │   └── xunfei_stream.py
+│       │   │   ├── intent
+│       │   │   │   ├── base.py
+│       │   │   │   ├── function_call
+│       │   │   │   │   └── function_call.py
+│       │   │   │   ├── intent_llm
+│       │   │   │   │   └── intent_llm.py
+│       │   │   │   └── nointent
+│       │   │   │       └── nointent.py
+│       │   │   ├── llm
+│       │   │   │   ├── AliBL
+│       │   │   │   │   └── AliBL.py
+│       │   │   │   ├── base.py
+│       │   │   │   ├── coze
+│       │   │   │   │   └── coze.py
+│       │   │   │   ├── dify
+│       │   │   │   │   └── dify.py
+│       │   │   │   ├── fastgpt
+│       │   │   │   │   └── fastgpt.py
+│       │   │   │   ├── gemini
+│       │   │   │   │   └── gemini.py
+│       │   │   │   ├── homeassistant
+│       │   │   │   │   └── homeassistant.py
+│       │   │   │   ├── ollama
+│       │   │   │   │   └── ollama.py
+│       │   │   │   ├── openai
+│       │   │   │   │   └── openai.py
+│       │   │   │   ├── system_prompt.py
+│       │   │   │   └── xinference
+│       │   │   │       └── xinference.py
+│       │   │   ├── memory
+│       │   │   │   ├── base.py
+│       │   │   │   ├── mem0ai
+│       │   │   │   │   └── mem0ai.py
+│       │   │   │   ├── mem_local_short
+│       │   │   │   │   └── mem_local_short.py
+│       │   │   │   ├── mem_report_only
+│       │   │   │   │   └── mem_report_only.py
+│       │   │   │   ├── nomem
+│       │   │   │   │   └── nomem.py
+│       │   │   │   └── powermem
+│       │   │   │       └── powermem.py
+│       │   │   ├── tools
+│       │   │   │   ├── base
+│       │   │   │   │   ├── __init__.py
+│       │   │   │   │   ├── tool_executor.py
+│       │   │   │   │   └── tool_types.py
+│       │   │   │   ├── device_iot
+│       │   │   │   │   ├── __init__.py
+│       │   │   │   │   ├── iot_descriptor.py
+│       │   │   │   │   ├── iot_executor.py
+│       │   │   │   │   └── iot_handler.py
+│       │   │   │   ├── device_mcp
+│       │   │   │   │   ├── __init__.py
+│       │   │   │   │   ├── mcp_client.py
+│       │   │   │   │   ├── mcp_executor.py
+│       │   │   │   │   └── mcp_handler.py
+│       │   │   │   ├── __init__.py
+│       │   │   │   ├── mcp_endpoint
+│       │   │   │   │   ├── __init__.py
+│       │   │   │   │   ├── mcp_endpoint_client.py
+│       │   │   │   │   ├── mcp_endpoint_executor.py
+│       │   │   │   │   └── mcp_endpoint_handler.py
+│       │   │   │   ├── server_mcp
+│       │   │   │   │   ├── __init__.py
+│       │   │   │   │   ├── mcp_client.py
+│       │   │   │   │   ├── mcp_executor.py
+│       │   │   │   │   └── mcp_manager.py
+│       │   │   │   ├── server_plugins
+│       │   │   │   │   ├── __init__.py
+│       │   │   │   │   └── plugin_executor.py
+│       │   │   │   ├── unified_tool_handler.py
+│       │   │   │   └── unified_tool_manager.py
+│       │   │   ├── tts
+│       │   │   │   ├── alibl_stream.py
+│       │   │   │   ├── aliyun.py
+│       │   │   │   ├── aliyun_stream.py
+│       │   │   │   ├── base.py
+│       │   │   │   ├── cozecn.py
+│       │   │   │   ├── custom.py
+│       │   │   │   ├── default.py
+│       │   │   │   ├── doubao.py
+│       │   │   │   ├── dto
+│       │   │   │   │   └── dto.py
+│       │   │   │   ├── edge.py
+│       │   │   │   ├── fishspeech.py
+│       │   │   │   ├── gpt_sovits_v2.py
+│       │   │   │   ├── gpt_sovits_v3.py
+│       │   │   │   ├── huoshan_double_stream.py
+│       │   │   │   ├── index_stream.py
+│       │   │   │   ├── minimax_httpstream.py
+│       │   │   │   ├── openai.py
+│       │   │   │   ├── paddle_speech.py
+│       │   │   │   ├── siliconflow.py
+│       │   │   │   ├── tencent.py
+│       │   │   │   └── xunfei_stream.py
+│       │   │   ├── vad
+│       │   │   │   ├── base.py
+│       │   │   │   └── silero.py
+│       │   │   └── vllm
+│       │   │       ├── base.py
+│       │   │       └── openai.py
+│       │   ├── utils
+│       │   │   ├── asr.py
+│       │   │   ├── audioRateController.py
+│       │   │   ├── auth.py
+│       │   │   ├── cache
+│       │   │   │   ├── config.py
+│       │   │   │   ├── manager.py
+│       │   │   │   └── strategies.py
+│       │   │   ├── context_provider.py
+│       │   │   ├── current_time.py
+│       │   │   ├── dialogue.py
+│       │   │   ├── gc_manager.py
+│       │   │   ├── intent.py
+│       │   │   ├── llm.py
+│       │   │   ├── memory.py
+│       │   │   ├── modules_initialize.py
+│       │   │   ├── opus_encoder_utils.py
+│       │   │   ├── output_counter.py
+│       │   │   ├── p3.py
+│       │   │   ├── prompt_manager.py
+│       │   │   ├── textUtils.py
+│       │   │   ├── tts.py
+│       │   │   ├── util.py
+│       │   │   ├── vad.py
+│       │   │   ├── vllm.py
+│       │   │   ├── voiceprint_provider.py
+│       │   │   └── wakeup_word.py
+│       │   └── websocket_server.py
+│       ├── docker-compose_all.yml
+│       ├── docker-compose.yml
+│       ├── mcp_server_settings.json
+│       ├── models
+│       │   ├── SenseVoiceSmall
+│       │   │   ├── chn_jpn_yue_eng_ko_spectok.bpe.model
+│       │   │   ├── configuration.json
+│       │   │   ├── config.yaml
+│       │   │   ├── demo.py
+│       │   │   └── example
+│       │   │       ├── en.mp3
+│       │   │       ├── ja.mp3
+│       │   │       ├── ko.mp3
+│       │   │       ├── yue.mp3
+│       │   │       └── zh.mp3
+│       │   └── snakers4_silero-vad
+│       │       ├── hubconf.py
+│       │       └── src
+│       │           └── silero_vad
+│       │               ├── data
+│       │               │   ├── __init__.py
+│       │               │   ├── silero_vad_16k_op15.onnx
+│       │               │   ├── silero_vad_half.onnx
+│       │               │   ├── silero_vad.jit
+│       │               │   └── silero_vad.onnx
+│       │               ├── __init__.py
+│       │               ├── model.py
+│       │               └── utils_vad.py
+│       ├── music
+│       │   ├── 一念千年_国风版.mp3
+│       │   ├── 中秋月.mp3
+│       │   └── 廉波老矣，尚能饭否.mp3
+│       ├── performance_tester
+│       │   ├── performance_tester_asr.py
+│       │   ├── performance_tester_llm.py
+│       │   ├── performance_tester_stream_asr.py
+│       │   ├── performance_tester_stream_tts.py
+│       │   ├── performance_tester_tts.py
+│       │   └── performance_tester_vllm.py
+│       ├── performance_tester.py
+│       ├── plugins_func
+│       │   ├── functions
+│       │   │   ├── call_device.py
+│       │   │   ├── change_role.py
+│       │   │   ├── get_news_from_chinanews.py
+│       │   │   ├── get_news_from_newsnow.py
+│       │   │   ├── get_time.py
+│       │   │   ├── get_weather.py
+│       │   │   ├── handle_exit_intent.py
+│       │   │   ├── hass_get_state.py
+│       │   │   ├── hass_init.py
+│       │   │   ├── hass_play_music.py
+│       │   │   ├── hass_set_state.py
+│       │   │   ├── play_music.py
+│       │   │   ├── search_from_ragflow.py
+│       │   │   └── web_search.py
+│       │   ├── loadplugins.py
+│       │   └── register.py
+│       └── requirements.txt
+├── project-tree.txt
+├── Readme.md
+├── README.md
+└── voice_orchestrator
+
+413 directories, 1556 files
