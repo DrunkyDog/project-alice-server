@@ -35,7 +35,7 @@ docker build -f Dockerfile-web -t 你的用户名/xiaozhi-esp32-server-web:新�
 ## 3、修改docker-compose配置
 
 ```bash
-cd main/xiaozhi-server
+cd main/alice-server
 ```
 
 编辑 `docker-compose_all.yml` 文件，将镜像版本替换为你刚才编译的版本：

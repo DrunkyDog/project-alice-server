@@ -43,10 +43,10 @@ git clone https://ghproxy.net/https://github.com/xinnan-tech/xiaozhi-esp32-serve
 此刻你需要把`model.pt`文件复制到新的目录去，你可以这样
 ```
 # 创建需要的目录
-mkdir -p /home/system/xiaozhi/xiaozhi-esp32-server/main/xiaozhi-server/data/
+mkdir -p /home/system/xiaozhi/xiaozhi-esp32-server/main/alice-server/data/
 
-cp 你原来的.config.yaml完整路径 /home/system/xiaozhi/xiaozhi-esp32-server/main/xiaozhi-server/data/.config.yaml
-cp 你原来的model.pt完整路径 /home/system/xiaozhi/xiaozhi-esp32-server/main/xiaozhi-server/models/SenseVoiceSmall/model.pt
+cp 你原来的.config.yaml完整路径 /home/system/xiaozhi/xiaozhi-esp32-server/main/alice-server/data/.config.yaml
+cp 你原来的model.pt完整路径 /home/system/xiaozhi/xiaozhi-esp32-server/main/alice-server/models/SenseVoiceSmall/model.pt
 ```
 
 # 第四步 建立三个自动编译文件
@@ -135,13 +135,13 @@ else
   kill -9 $PID
   echo "已杀掉进程 $PID"
 fi
-cd main/xiaozhi-server
+cd main/alice-server
 # 初始化conda环境
 source ~/.bashrc
 conda activate xiaozhi-esp32-server
 pip install -r requirements.txt
 nohup python app.py >/dev/null &
-tail -f /home/system/xiaozhi/xiaozhi-esp32-server/main/xiaozhi-server/tmp/server.log
+tail -f /home/system/xiaozhi/xiaozhi-esp32-server/main/alice-server/tmp/server.log
 ```
 
 保存好后执行赋权命令
@@ -167,7 +167,7 @@ cd /home/system/xiaozhi
 # 后期想查看java日志，执行以下命令
 tail -f nohup.out
 # 后期想查看python日志，执行以下命令
-tail -f /home/system/xiaozhi/xiaozhi-esp32-server/main/xiaozhi-server/tmp/server.log
+tail -f /home/system/xiaozhi/xiaozhi-esp32-server/main/alice-server/tmp/server.log
 ```
 
 # 注意事项

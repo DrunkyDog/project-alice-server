@@ -40,7 +40,7 @@ xiaozhi-server
 
 ##### 1.1.3.1 下载 docker-compose.yaml
 
-用浏览器打开[这个链接](../main/xiaozhi-server/docker-compose.yml)。
+用浏览器打开[这个链接](../main/alice-server/docker-compose.yml)。
 
 在页面的右侧找到名称为`RAW`按钮，在`RAW`按钮的旁边，找到下载的图标，点击下载按钮，下载`docker-compose.yml`文件。 把文件下载到你的
 `xiaozhi-server`中。
@@ -49,7 +49,7 @@ xiaozhi-server
 
 ##### 1.1.3.2 创建 config.yaml
 
-用浏览器打开[这个链接](../main/xiaozhi-server/config.yaml)。
+用浏览器打开[这个链接](../main/alice-server/config.yaml)。
 
 在页面的右侧找到名称为`RAW`按钮，在`RAW`按钮的旁边，找到下载的图标，点击下载按钮，下载`config.yaml`文件。 把文件下载到你的
 `xiaozhi-server`下面的`data`文件夹中，然后把`config.yaml`文件重命名为`.config.yaml`。
@@ -160,8 +160,8 @@ conda install libiconv -y
 ```
 # 继续使用conda环境
 conda activate xiaozhi-esp32-server
-# 进入到你的项目根目录，再进入main/xiaozhi-server
-cd main/xiaozhi-server
+# 进入到你的项目根目录，再进入main/alice-server
+cd main/alice-server
 pip config set global.index-url https://mirrors.aliyun.com/pypi/simple/
 pip install -r requirements.txt
 ```
