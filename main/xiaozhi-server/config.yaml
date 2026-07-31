@@ -983,6 +983,30 @@ TTS:
     sample_steps: 32
     if_sr: false
     # language: "Chinese"  # Specify output language, e.g.: Chinese, English, Japanese, Korean, etc. Set according to the selected voice's supported languages; defaults to Chinese if not set
+  MinimaxIOTTS:
+    # MiniMax T2A v2 on the global endpoint (api.minimax.io), non-streaming
+    # Use this one for Thai: language_boost fixes pronunciation, and the full MP3
+    # is converted to Opus by the base class, which plays reliably on the device
+    # API key: https://www.minimax.io/platform (no group_id needed on the global host)
+    type: minimax_io
+    output_dir: tmp/
+    api_key: ""
+    # Voice id, cloned voices (moss_audio_...) work here too
+    voice_id: "moss_audio_placeholder"
+    model: "speech-2.8-hd"
+    language_boost: "Thai"
+    emotion: "happy"
+    speed: 1.0
+    vol: 1.0
+    pitch: 0
+    sample_rate: 32000
+    format: "mp3"
+    # Rewrite Thai chat-laughter "555" into laughter instead of reading it as a number
+    # Needs a speech-2.8 model; set to false on older models
+    laugh_555: true
+    # Optional voice effect, e.g. spacious_echo
+    sound_effects: ""
+    host: "api.minimax.io"
   MinimaxTTSHTTPStream:
     # Minimax streaming TTS service
     type: minimax_httpstream

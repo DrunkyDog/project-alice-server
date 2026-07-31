@@ -746,3 +746,10 @@ databaseChangeLog:
         - sqlFile:
             encoding: utf8
             path: classpath:db/changelog/202607312000.sql
+  - changeSet:
+      id: 202607312200
+      author: DrunkyDog
+      changes:
+        - sqlFile:
+            encoding: utf8
+            path: classpath:db/changelog/202607312200.sql
