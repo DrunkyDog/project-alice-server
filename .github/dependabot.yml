@@ -1,6 +1,6 @@
 version: 2
 updates:
   - package-ecosystem: pip
-    directory: /main/xiaozhi-server
+    directory: /main/alice-server
     schedule:
       interval: weekly
