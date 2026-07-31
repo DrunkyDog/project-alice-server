@@ -36,7 +36,7 @@ test('falls back to the legacy createDate only when the timestamp is missing', (
 test('formats the same instant consistently in each browser time zone', () => {
   const formatter = timeZone => timestamp => new Date(timestamp).toLocaleString('en-US', { timeZone });
 
-  for (const timeZone of ['Asia/Shanghai', 'America/Sao_Paulo']) {
+  for (const timeZone of ['Asia/Bangkok', 'Asia/Tokyo']) {
     assert.equal(
       formatTimestamp(TIMESTAMP, formatter(timeZone)),
       formatTimestamp(String(TIMESTAMP), formatter(timeZone)),

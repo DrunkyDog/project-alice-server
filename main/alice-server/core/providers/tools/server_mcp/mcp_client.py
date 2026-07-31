@@ -27,7 +27,7 @@ class ServerMCPClient:
     """服务端MCP客户端，用于连接和管理MCP服务"""
 
     def __init__(self, config: Dict[str, Any]):
-        """初始化服务端MCP客户端
+        """Initialize server-side MCP客户端
 
         Args:
             config: MCP服务配置字典
@@ -40,7 +40,7 @@ class ServerMCPClient:
         self._shutdown_evt = asyncio.Event()
 
         self.session: Optional[ClientSession] = None
-        self.tools: List = []  # 原始工具对象
+        self.tools: List = []  # Raw tool object
         self.tools_dict: Dict[str, Any] = {}
         self.name_mapping: Dict[str, str] = {}
 
@@ -51,7 +51,7 @@ class ServerMCPClient:
              logging_callback: LoggingFnT | None = None,
              message_handler: MessageHandlerFnT | None = None,
              client_info: Implementation | None = None):
-        """初始化MCP客户端连接"""
+        """Initialize MCP client connection"""
         if self._worker_task:
             return
 
@@ -193,7 +193,7 @@ class ServerMCPClient:
                 # 建立SSEClient
                 elif "url" in self.config:
                     headers = dict(self.config.get("headers", {}))
-                    # TODO 兼容旧版本
+                    # TODO Compatible with older versions
                     if "API_ACCESS_TOKEN" in self.config:
                         headers["Authorization"] = f"Bearer {self.config['API_ACCESS_TOKEN']}"
                         self.logger.bind(tag=TAG).warning(f"你正在使用旧过时的配置 API_ACCESS_TOKEN ，请在.mcp_server_settings.json中将API_ACCESS_TOKEN直接设置在headers中，例如 'Authorization': 'Bearer API_ACCESS_TOKEN'")

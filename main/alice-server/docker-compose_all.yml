@@ -1,62 +1,65 @@
-# Docker安装全模块
+# Docker Full Module Installation
 
 version: '3'
 services:
-  # Server模块
-  xiaozhi-esp32-server:
-    image: ghcr.nju.edu.cn/xinnan-tech/xiaozhi-esp32-server:server_latest
-    container_name: xiaozhi-esp32-server
+  # Server Module
+  project-alice-server:
+    image: ghcr.io/xinnan-tech/xiaozhi-esp32-server:server_latest
+    container_name: project-alice-server
     depends_on:
-      - xiaozhi-esp32-server-db
-      - xiaozhi-esp32-server-redis
+      - project-alice-server-db
+      - project-alice-server-redis
     restart: always
     networks:
       - default
     ports:
-      # ws服务端
+      # WebSocket Server
       - "8000:8000"
-      # http服务的端口，用于视觉分析接口
+      # HTTP service port, used for vision analysis API
       - "8003:8003"
     security_opt:
       - seccomp:unconfined
     environment:
-      - TZ=Asia/Shanghai
+      - TZ=Asia/Bangkok
+      - GOOGLE_MAPS_API_KEY=AIzaSyCiwPDPNc6T101SZO72hfYRlj0OZud1Ky4
+      - GOOGLE_CALENDAR_ID=atty.dhamanoon@gmail.com
     volumes:
-      # 配置文件目录
+      # Configuration file directory
       - ./data:/opt/xiaozhi-esp32-server/data
-      # 模型文件挂接，很重要
+      # Model file mount (Very Important)
       - ./models/SenseVoiceSmall/model.pt:/opt/xiaozhi-esp32-server/models/SenseVoiceSmall/model.pt
 
-  # manager-api和manager-web模块
-  xiaozhi-esp32-server-web:
-    image: ghcr.nju.edu.cn/xinnan-tech/xiaozhi-esp32-server:web_latest
-    container_name: xiaozhi-esp32-server-web
+  # Manager API and Manager Web Module
+  project-alice-server-web:
+    image: ghcr.io/xinnan-tech/xiaozhi-esp32-server:web_latest
+    container_name: project-alice-server-web
     restart: always
     networks:
       - default
     depends_on:
-      xiaozhi-esp32-server-db:
+      project-alice-server-db:
         condition: service_healthy
-      xiaozhi-esp32-server-redis:
+      project-alice-server-redis:
         condition: service_healthy
     ports:
-      # 智控台
+      # Control Panel / Admin Console
       - "8002:8002"
     environment:
-      - TZ=Asia/Shanghai
-      - SPRING_DATASOURCE_DRUID_URL=jdbc:mysql://xiaozhi-esp32-server-db:3306/xiaozhi_esp32_server?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true&connectTimeout=30000&socketTimeout=30000&autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+      - TZ=Asia/Bangkok
+      - SPRING_DATASOURCE_DRUID_URL=jdbc:mysql://project-alice-server-db:3306/project_alice_server?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Bangkok&nullCatalogMeansCurrent=true&connectTimeout=30000&socketTimeout=30000&autoReconnect=true&failOverReadOnly=false&maxReconnects=10
       - SPRING_DATASOURCE_DRUID_USERNAME=root
-      - SPRING_DATASOURCE_DRUID_PASSWORD=123456
-      - SPRING_DATA_REDIS_HOST=xiaozhi-esp32-server-redis
+      - SPRING_DATASOURCE_DRUID_PASSWORD=54414B415255
+      - SPRING_DATA_REDIS_HOST=project-alice-server-redis
       - SPRING_DATA_REDIS_PASSWORD=
       - SPRING_DATA_REDIS_PORT=6379
     volumes:
-      # 配置文件目录
+      # Uploaded files directory
       - ./uploadfile:/uploadfile
-  # 数据库模块
-  xiaozhi-esp32-server-db:
+
+  # Database Module
+  project-alice-server-db:
     image: mysql:latest
-    container_name: xiaozhi-esp32-server-db
+    container_name: project-alice-server-db
     healthcheck:
       test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
       timeout: 45s
@@ -70,16 +73,17 @@ services:
     volumes:
       - ./mysql/data:/var/lib/mysql
     environment:
-      - TZ=Asia/Shanghai
-      - MYSQL_ROOT_PASSWORD=123456
-      - MYSQL_DATABASE=xiaozhi_esp32_server
+      - TZ=Asia/Bangkok
+      - MYSQL_ROOT_PASSWORD=54414B415255
+      - MYSQL_DATABASE=project_alice_server
       - MYSQL_INITDB_ARGS="--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
-  # redis模块
-  xiaozhi-esp32-server-redis:
+
+  # Redis Module
+  project-alice-server-redis:
     image: redis:8.0
     expose:
       - 6379
-    container_name: xiaozhi-esp32-server-redis
+    container_name: project-alice-server-redis
     restart: always
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
@@ -88,5 +92,6 @@ services:
       retries: 3
     networks:
       - default
+
 networks:
   default:

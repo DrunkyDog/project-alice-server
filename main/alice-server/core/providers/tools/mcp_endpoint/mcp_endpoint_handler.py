@@ -174,7 +174,7 @@ async def handle_mcp_endpoint_message(mcp_client: MCPEndpointClient, message: st
                             "所有MCP接入点工具已获取，客户端准备就绪"
                         )
 
-                        # 刷新工具缓存，确保MCP接入点工具被包含在函数列表中
+                        # Refresh tool cache，确保MCP接入点工具被包含在函数列表中
                         if (
                             hasattr(mcp_client, "conn")
                             and mcp_client.conn
@@ -312,7 +312,7 @@ async def call_mcp_endpoint_tool(
                 except json.JSONDecodeError:
                     # 如果解析失败，尝试合并多个JSON对象
                     try:
-                        # 使用正则表达式匹配所有JSON对象
+                        # Use regex to match all JSON objects
                         json_objects = re.findall(r"\{[^{}]*\}", args)
                         if len(json_objects) > 1:
                             # 合并所有JSON对象
@@ -329,16 +329,16 @@ async def call_mcp_endpoint_tool(
                             else:
                                 raise ValueError(f"无法解析任何有效的JSON对象: {args}")
                         else:
-                            raise ValueError(f"参数JSON解析失败: {args}")
+                            raise ValueError(f"JSON parameter parsing failed: {args}")
                     except Exception as e:
                         logger.bind(tag=TAG).error(
-                            f"参数JSON解析失败: {str(e)}, 原始参数: {args}"
+                            f"JSON parameter parsing failed: {str(e)}, 原始参数: {args}"
                         )
-                        raise ValueError(f"参数JSON解析失败: {str(e)}")
+                        raise ValueError(f"JSON parameter parsing failed: {str(e)}")
         elif isinstance(args, dict):
             arguments = args
         else:
-            raise ValueError(f"参数类型错误，期望字符串或字典，实际类型: {type(args)}")
+            raise ValueError(f"Parameter type error，期望字符串或字典，实际类型: {type(args)}")
 
         # 确保参数是字典类型
         if not isinstance(arguments, dict):
@@ -346,7 +346,7 @@ async def call_mcp_endpoint_tool(
 
     except Exception as e:
         if not isinstance(e, ValueError):
-            raise ValueError(f"参数处理失败: {str(e)}")
+            raise ValueError(f"Parameter processing failed: {str(e)}")
         raise e
 
     actual_name = mcp_client.name_mapping.get(tool_name, tool_name)

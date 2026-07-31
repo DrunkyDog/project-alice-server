@@ -43,30 +43,30 @@ class TTSProviderBase(ABC):
         self.tts_audio_first_sentence = True
         self.before_stop_play_files = []
         self.report_on_last = False
-        # sentence_id 到文本的映射，用于流式TTS获取正确的字幕文本
+        # Mapping from sentence_id to text, used for streaming TTS to get correct subtitle text
         self._sentence_text_map = {}
-        # 加载替换词，用于一次性正则替换
+        # Load replacement words for one-time regex replacement
         raw_words = config.get("correct_words", [])
         self.correct_words = {}
         for item in raw_words:
             parts = item.split("|", 1)
             if len(parts) == 2:
                 self.correct_words[parts[0]] = parts[1]
-        # 构建正则表达式，使用最长匹配优先（排序后转义拼接）
+        # Build regex pattern, using longest match priority (escape concatenation after sorting)
         if self.correct_words:
-            # 按key长度降序排列，长的先匹配，避免短词部分干扰
+            # Sort by key length descending, long ones match first, avoid short word interference
             sorted_keys = sorted(self.correct_words.keys(), key=len, reverse=True)
             pattern_str = "|".join(re.escape(k) for k in sorted_keys)
             self._correct_words_pattern = re.compile(pattern_str)
-            # 构建反向替换正则，用于将TTS服务返回的替换后文本还原为原始文本（字幕显示）
+            # Build reverse replacement regex for restoring replaced text returned by TTS service to original text (subtitle display)
             reverse_map = {v: k for k, v in self.correct_words.items()}
             sorted_reverse_keys = sorted(reverse_map.keys(), key=len, reverse=True)
             reverse_pattern_str = "|".join(re.escape(k) for k in sorted_reverse_keys)
             self._reverse_words_pattern = re.compile(reverse_pattern_str)
             self._reverse_words_map = reverse_map
-            # 流式滑动窗口：按首字分组的替换词字典，用于快速查找
+            # Streaming sliding window: replacement word dictionary grouped by first character for quick lookup
             self._words_by_first_char = {}
-            for key in sorted_keys:  # 使用已按长度降序排列的keys，确保长词优先匹配
+            for key in sorted_keys:  # Use keys already sorted by length descending to ensure long words match first
                 first_char = key[0] if key else ""
                 if first_char not in self._words_by_first_char:
                     self._words_by_first_char[first_char] = []
@@ -76,7 +76,7 @@ class TTSProviderBase(ABC):
             self._reverse_words_pattern = None
             self._reverse_words_map = None
 
-        # 流式滑动窗口：待匹配的缓存文本
+        # Streaming sliding window: cache text to be matched
         self._pending_prefix = ""
         self.tts_text_buff = []
         self.punctuations = (

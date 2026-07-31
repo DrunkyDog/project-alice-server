@@ -44,11 +44,11 @@ const getDefaultLanguage = () => {
 
 const i18n = new VueI18n({
   locale: getDefaultLanguage(),
-  fallbackLocale: 'zh_CN',
+  fallbackLocale: 'en',
   messages: {
     'zh_CN': { ...zhLocale, ...zhCN },
     'zh_TW': { ...twLocale, ...zhTW },
-    'en': { ...en, ...enLocale },
+    'en': { ...enLocale, ...en },
     'de': { ...de, ...deLocale },
     'vi': { ...vi, ...viLocale },
     'pt_BR': { ...ptBR, ...ptBRLocale }

@@ -29,14 +29,14 @@ class TTSProvider(TTSProviderBase):
         self.output_file = config.get("output_dir")
         self.audio_file_type = config.get("format", "wav")
 
-        # 音频参数配置
+        # Audio parameter configuration
         speed = config.get("speed", "0")
         self.speed = int(speed) if speed else 0
 
         volume = config.get("volume", "0")
         self.volume = int(volume) if volume else 0
 
-        # 应用百分比调整（如果存在），否则使用公有化配置
+        # Apply percentage adjustment (if exists), otherwise use public configuration
         self._apply_percentage_params(config)
 
     def _get_auth_headers(self, request_body):

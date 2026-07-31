@@ -79,7 +79,7 @@ class ServerPluginExecutor(ToolExecutor):
         for func_name in all_required_functions:
             func_item = all_function_registry.get(func_name)
             if func_item:
-                # 从函数注册中获取描述
+                # Get description from function registration
                 fun_description = (
                     self.config.get("plugins", {})
                     .get(func_name, {})

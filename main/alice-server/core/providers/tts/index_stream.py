@@ -37,7 +37,7 @@ class TTSProvider(TTSProviderBase):
         self.pcm_buffer = bytearray()
 
     def tts_text_priority_thread(self):
-        """流式文本处理线程"""
+        """Streaming text processing thread"""
         while not self.conn.stop_event.is_set():
             try:
                 message = self.tts_text_queue.get(timeout=1)
@@ -192,13 +192,13 @@ class TTSProvider(TTSProviderBase):
         return audio_to_data_stream(audio_file_path, is_opus=True, callback=callback, sample_rate=24000, opus_encoder=self.opus_encoder)
 
     async def close(self):
-        """资源清理"""
+        """Resource cleanup"""
         await super().close()
         if hasattr(self, "opus_encoder"):
             self.opus_encoder.close()
 
     def to_tts(self, text: str) -> list:
-        """非流式TTS处理，用于测试及保存音频文件的场景
+        """Non-streaming TTS processing for testing and saving audio file scenarios
         Args:
             text: 要转换的文本
         Returns:

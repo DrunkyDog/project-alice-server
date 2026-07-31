@@ -36,7 +36,7 @@ async def handleIotDescriptors(conn: "ConnectionHandler", descriptors):
         # 处理缺失properties的情况
         if "properties" not in descriptor:
             descriptor["properties"] = {}
-            # 从methods中提取所有参数作为properties
+            # Extract all parameters from methods asproperties
             if "methods" in descriptor:
                 for method_name, method_info in descriptor["methods"].items():
                     if "parameters" in method_info:
@@ -47,7 +47,7 @@ async def handleIotDescriptors(conn: "ConnectionHandler", descriptors):
                                 "type": param_info["type"],
                             }
 
-        # 创建IOT设备描述符
+        # Create IOT device descriptor
         iot_descriptor = IotDescriptor(
             descriptor["name"],
             descriptor["description"],
@@ -59,7 +59,7 @@ async def handleIotDescriptors(conn: "ConnectionHandler", descriptors):
 
     # 如果注册了新函数，更新function描述列表
     if functions_changed and hasattr(conn, "func_handler"):
-        # 注册IoT工具到统一工具处理器
+        # 注册IoT工具到Unified tool handler
         await conn.func_handler.register_iot_tools(descriptors)
 
         conn.func_handler.current_support_functions()

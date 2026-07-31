@@ -65,7 +65,7 @@ class DeviceIoTExecutor(ToolExecutor):
                         if k not in ["response_success", "response_failure"]
                     }
 
-                    # 发送IoT控制命令
+                    # Send IoT control command
                     await self._send_iot_command(
                         device_name, method_name, control_params
                     )
@@ -111,7 +111,7 @@ class DeviceIoTExecutor(ToolExecutor):
     async def _send_iot_command(
         self, device_name: str, method_name: str, parameters: Dict[str, Any]
     ):
-        """发送IoT控制命令"""
+        """Send IoT control command"""
         for key, value in self.conn.iot_descriptors.items():
             if key.lower() == device_name.lower():
                 for method in value.methods:

@@ -58,7 +58,7 @@ class TTSProvider(TTSProviderBase):
         if self.voice:
             self.voice_setting["voice_id"] = self.voice
 
-        # 应用百分比调整（如果存在），否则使用公有化配置
+        # Apply percentage adjustment (if exists), otherwise use public configuration
         if "ttsVolume" in config:
             self.voice_setting["vol"] = round(convert_percentage_to_range(
                 config["ttsVolume"], min_val=0.1, max_val=10, base_val=1.0
@@ -94,7 +94,7 @@ class TTSProvider(TTSProviderBase):
         self.audio_setting["sample_rate"] = conn.sample_rate
 
     def tts_text_priority_thread(self):
-        """流式文本处理线程"""
+        """Streaming text processing thread"""
         while not self.conn.stop_event.is_set():
             try:
                 message = self.tts_text_queue.get(timeout=1)
@@ -287,13 +287,13 @@ class TTSProvider(TTSProviderBase):
             self.tts_audio_queue.put((SentenceType.LAST, [], None))
 
     async def close(self):
-        """资源清理"""
+        """Resource cleanup"""
         await super().close()
         if hasattr(self, "opus_encoder"):
             self.opus_encoder.close()
 
     def to_tts(self, text: str) -> list:
-        """非流式TTS处理，用于测试及保存音频文件的场景
+        """Non-streaming TTS processing for testing and saving audio file scenarios
         Args:
             text: 要转换的文本
         Returns:

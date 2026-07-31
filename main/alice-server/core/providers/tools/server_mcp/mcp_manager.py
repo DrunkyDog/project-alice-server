@@ -1,4 +1,4 @@
-"""服务端MCP管理器"""
+"""服务端MCP manager"""
 
 import asyncio
 import os
@@ -19,7 +19,7 @@ class ServerMCPManager:
     """管理多个服务端MCP服务的集中管理器"""
 
     def __init__(self, conn) -> None:
-        """初始化MCP管理器"""
+        """初始化MCP manager"""
         self.conn = conn
         self.config_path = get_project_dir() + "data/.mcp_server_settings.json"
         if not os.path.exists(self.config_path):
@@ -32,7 +32,7 @@ class ServerMCPManager:
         self._init_lock = asyncio.Lock()
 
     def load_config(self) -> Dict[str, Any]:
-        """加载MCP服务配置"""
+        """Load MCP service configuration"""
         if len(self.config_path) == 0:
             return {}
 
@@ -50,13 +50,13 @@ class ServerMCPManager:
         """初始化单个MCP服务"""
         client = None
         try:
-            # 初始化服务端MCP客户端
-            logger.bind(tag=TAG).info(f"初始化服务端MCP客户端: {name}")
+            # Initialize server-side MCP客户端
+            logger.bind(tag=TAG).info(f"Initialize server-side MCP客户端: {name}")
             client = ServerMCPClient(srv_config)
             # 设置超时时间10秒
             await asyncio.wait_for(client.initialize(logging_callback=self.logging_callback), timeout=10)
 
-            # 使用锁保护共享状态的修改
+            # Use lock to protect shared state modifications
             async with self._init_lock:
                 self.clients[name] = client
                 client_tools = client.get_available_tools()
@@ -93,7 +93,7 @@ class ServerMCPManager:
 
         # 输出当前支持的服务端MCP工具列表
         if hasattr(self.conn, "func_handler") and self.conn.func_handler:
-            # 刷新工具缓存以确保服务端MCP工具被正确加载
+            # Refresh tool cache以确保服务端MCP工具被正确加载
             if hasattr(self.conn.func_handler, "tool_manager"):
                 self.conn.func_handler.tool_manager.refresh_tools()
             self.conn.func_handler.current_support_functions()

@@ -1,11 +1,11 @@
 # -*- coding:utf-8 -*-
-#--------- 本项目推荐环境是python3.10，以下暂时不推荐升级的依赖
+#--------- Recommended environment for this project is python3.10, the following dependencies are currently not recommended for upgrade
 torch==2.2.2
 torchaudio==2.2.2
 numpy==1.26.4
-#--------- cozepy0.20.0要求websockets<15.0.0，以下暂时不推荐升级的依赖
+#--------- cozepy0.20.0 requires websockets<15.0.0, the following dependencies are currently not recommended for upgrade
 websockets==14.2
-#--------- 以下是可升级的依赖
+#--------- The following dependencies can be upgraded
 pyyml==0.0.2
 silero_vad==6.1.0
 opuslib_next==1.1.5

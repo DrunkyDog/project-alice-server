@@ -106,7 +106,7 @@ class MCPEndpointClient:
             raise RuntimeError("WebSocket连接未建立")
 
     async def close(self):
-        """关闭WebSocket连接"""
+        """Close WebSocket connection"""
         if self.websocket:
             await self.websocket.close()
             self.websocket = None

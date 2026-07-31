@@ -17,7 +17,7 @@ logger = setup_logging()
 
 
 class MCPClient:
-    """设备端MCP客户端，用于管理MCP状态和工具"""
+    """Device-side MCP client for managing MCP status and tools"""
 
     def __init__(self):
         self.tools = {}  # sanitized_name -> tool_data
@@ -212,7 +212,7 @@ async def handle_mcp_message(
                     await mcp_client.set_ready(True)
                     logger.bind(tag=TAG).debug("所有工具已获取，MCP客户端准备就绪")
 
-                    # 刷新工具缓存，确保MCP工具被包含在函数列表中
+                    # Refresh tool cache，确保MCP工具被包含在函数列表中
                     if hasattr(conn, "func_handler") and conn.func_handler:
                         conn.func_handler.tool_manager.refresh_tools()
                         conn.func_handler.current_support_functions()
@@ -236,7 +236,7 @@ async def handle_mcp_message(
 
 
 async def send_mcp_initialize_message(conn: "ConnectionHandler"):
-    """发送MCP初始化消息"""
+    """Send MCP initialization message"""
 
     vision_url = get_vision_url(conn.config)
 
@@ -266,18 +266,18 @@ async def send_mcp_initialize_message(conn: "ConnectionHandler"):
             },
         },
     }
-    logger.bind(tag=TAG).debug("发送MCP初始化消息")
+    logger.bind(tag=TAG).debug("Send MCP initialization message")
     await send_mcp_message(conn, payload)
 
 
 async def send_mcp_tools_list_request(conn: "ConnectionHandler"):
-    """发送MCP工具列表请求"""
+    """Send MCP tool list request"""
     payload = {
         "jsonrpc": "2.0",
         "id": 2,  # mcpToolsListID
         "method": "tools/list",
     }
-    logger.bind(tag=TAG).debug("发送MCP工具列表请求")
+    logger.bind(tag=TAG).debug("Send MCP tool list request")
     await send_mcp_message(conn, payload)
 
 
@@ -326,7 +326,7 @@ async def call_mcp_tool(
                 except json.JSONDecodeError:
                     # 如果解析失败，尝试合并多个JSON对象
                     try:
-                        # 使用正则表达式匹配所有JSON对象
+                        # Use regex to match all JSON objects
                         json_objects = re.findall(r"\{[^{}]*\}", args)
                         if len(json_objects) > 1:
                             # 合并所有JSON对象
@@ -343,16 +343,16 @@ async def call_mcp_tool(
                             else:
                                 raise ValueError(f"无法解析任何有效的JSON对象: {args}")
                         else:
-                            raise ValueError(f"参数JSON解析失败: {args}")
+                            raise ValueError(f"JSON parameter parsing failed: {args}")
                     except Exception as e:
                         logger.bind(tag=TAG).error(
-                            f"参数JSON解析失败: {str(e)}, 原始参数: {args}"
+                            f"JSON parameter parsing failed: {str(e)}, 原始参数: {args}"
                         )
-                        raise ValueError(f"参数JSON解析失败: {str(e)}")
+                        raise ValueError(f"JSON parameter parsing failed: {str(e)}")
         elif isinstance(args, dict):
             arguments = args
         else:
-            raise ValueError(f"参数类型错误，期望字符串或字典，实际类型: {type(args)}")
+            raise ValueError(f"Parameter type error，期望字符串或字典，实际类型: {type(args)}")
 
         # 确保参数是字典类型
         if not isinstance(arguments, dict):
@@ -360,7 +360,7 @@ async def call_mcp_tool(
 
     except Exception as e:
         if not isinstance(e, ValueError):
-            raise ValueError(f"参数处理失败: {str(e)}")
+            raise ValueError(f"Parameter processing failed: {str(e)}")
         raise e
 
     actual_name = mcp_client.name_mapping.get(tool_name, tool_name)

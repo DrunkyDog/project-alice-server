@@ -179,7 +179,7 @@ class TTSProvider(TTSProviderBase):
         self.additions = {**default_additions, **config.get("additions", {})}
         self.mix_speaker = {**default_mix_speaker, **config.get("mix_speaker", {})}
 
-        # 应用百分比调整（如果存在），否则使用公有化配置
+        # Apply percentage adjustment (if exists), otherwise use public configuration
         if "ttsVolume" in config:
             self.audio_params["loudness_rate"] = int(convert_percentage_to_range(
                 config["ttsVolume"], min_val=-50, max_val=100, base_val=0
@@ -312,7 +312,7 @@ class TTSProvider(TTSProviderBase):
                             self.conn.sentence_id = uuid.uuid4().hex
                             logger.bind(tag=TAG).debug(f"自动生成新的 会话ID: {self.conn.sentence_id}")
 
-                        logger.bind(tag=TAG).debug("开始启动TTS会话...")
+                        logger.bind(tag=TAG).debug("Starting TTS session...")
                         future = asyncio.run_coroutine_threadsafe(
                             self.start_session(self.conn.sentence_id),
                             loop=self.conn.loop,
@@ -321,7 +321,7 @@ class TTSProvider(TTSProviderBase):
                         self.before_stop_play_files.clear()
                         logger.bind(tag=TAG).debug("TTS会话启动成功")
                     except Exception as e:
-                        logger.bind(tag=TAG).error(f"启动TTS会话失败: {str(e)}")
+                        logger.bind(tag=TAG).error(f"Start TTS session失败: {str(e)}")
                         continue
 
                 elif ContentType.TEXT == message.content_type:
@@ -348,14 +348,14 @@ class TTSProvider(TTSProviderBase):
                         self._process_audio_file_stream(message.content_file, callback=lambda audio_data: self.handle_audio_file(audio_data, message.content_detail))
                 if message.sentence_type == SentenceType.LAST:
                     try:
-                        logger.bind(tag=TAG).debug("开始结束TTS会话...")
+                        logger.bind(tag=TAG).debug("Ending TTS session...")
                         future = asyncio.run_coroutine_threadsafe(
                             self.finish_session(self.conn.sentence_id),
                             loop=self.conn.loop,
                         )
                         future.result(timeout=self.tts_timeout)
                     except Exception as e:
-                        logger.bind(tag=TAG).error(f"结束TTS会话失败: {str(e)}")
+                        logger.bind(tag=TAG).error(f"End TTS session失败: {str(e)}")
                         continue
 
             except queue.Empty:
@@ -425,7 +425,7 @@ class TTSProvider(TTSProviderBase):
             logger.bind(tag=TAG).debug("会话启动请求已发送")
         except Exception as e:
             logger.bind(tag=TAG).error(f"启动会话失败: {str(e)}")
-            # 确保清理资源
+            # Ensure resources are cleaned up
             await self.close()
             raise
 
@@ -447,7 +447,7 @@ class TTSProvider(TTSProviderBase):
 
         except Exception as e:
             logger.bind(tag=TAG).error(f"关闭会话失败: {str(e)}")
-            # 确保清理资源
+            # Ensure resources are cleaned up
             await self.close()
             raise
 
@@ -468,12 +468,12 @@ class TTSProvider(TTSProviderBase):
                 logger.bind(tag=TAG).debug("会话取消请求已发送")
         except Exception as e:
             logger.bind(tag=TAG).error(f"取消会话失败: {str(e)}")
-            # 确保清理资源
+            # Ensure resources are cleaned up
             await self.close()
             raise
 
     async def close(self):
-        """资源清理方法"""
+        """Resource cleanup方法"""
         await super().close()
         self.activate_session = False
         await self._cancel_monitor_task()
@@ -486,7 +486,7 @@ class TTSProvider(TTSProviderBase):
             self.ws = None
 
     async def _start_monitor_tts_response(self):
-        """监听TTS响应 - 长期运行"""
+        """Monitor TTS response - long-running"""
         try:
             while not self.conn.stop_event.is_set():
                 try:
@@ -739,7 +739,7 @@ class TTSProvider(TTSProviderBase):
         self._monitor_task = None
 
     def to_tts(self, text: str) -> list:
-        """非流式生成音频数据，用于生成音频及测试场景
+        """Non-streaming audio data generation for audio generation and testing scenarios
         Args:
             text: 要转换的文本
         Returns:
@@ -823,7 +823,7 @@ class TTSProvider(TTSProviderBase):
                             break
 
                 finally:
-                    # 清理资源
+                    # Clean up resources
                     try:
                         await ws.close()
                     except:

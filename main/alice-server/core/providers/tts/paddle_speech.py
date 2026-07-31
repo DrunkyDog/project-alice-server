@@ -39,7 +39,7 @@ class TTSProvider(TTSProviderBase):
         
         self.delete_audio_file = config.get("delete_audio", True)
 
-        # 应用百分比调整（如果存在），否则使用公有化配置
+        # Apply percentage adjustment (if exists), otherwise use public configuration
         self._apply_percentage_params(config)
 
         if not self.delete_audio_file:

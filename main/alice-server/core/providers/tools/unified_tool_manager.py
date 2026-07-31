@@ -107,7 +107,7 @@ class ToolManager:
         return list(tools.keys())
 
     def refresh_tools(self):
-        """刷新工具缓存"""
+        """Refresh tool cache"""
         self._invalidate_cache()
         self.logger.debug("工具缓存已刷新")
 

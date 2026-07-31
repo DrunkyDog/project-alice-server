@@ -15,7 +15,7 @@ class ServerMCPExecutor(ToolExecutor):
         self._initialized = False
 
     async def initialize(self):
-        """初始化MCP管理器"""
+        """初始化MCP manager"""
         if not self._initialized:
             self.mcp_manager = ServerMCPManager(self.conn)
             self._initialized = True
@@ -28,7 +28,7 @@ class ServerMCPExecutor(ToolExecutor):
         if not self._initialized or not self.mcp_manager:
             return ActionResponse(
                 action=Action.ERROR,
-                response="MCP管理器未初始化",
+                response="MCP manager未初始化",
             )
 
         try:

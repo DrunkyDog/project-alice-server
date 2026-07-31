@@ -72,7 +72,7 @@ class TTSProvider(TTSProviderBase):
         # 设置为流式接口类型
         self.interface_type = InterfaceType.DUAL_STREAM
 
-        # 基础配置
+        # Basic configuration
         self.app_id = config.get("app_id")
         self.api_key = config.get("api_key")
         self.api_secret = config.get("api_secret")
@@ -81,12 +81,12 @@ class TTSProvider(TTSProviderBase):
         # 接口地址
         self.api_url = config.get("api_url", "wss://cbm01.cn-huabei-1.xf-yun.com/v1/private/mcd9m97e6")
 
-        # 音色配置
+        # Voice configuration
         self.voice = config.get("voice", "x5_lingxiaoxuan_flow")
         if config.get("private_voice"):
             self.voice = config.get("private_voice")
 
-        # 音频参数配置
+        # Audio parameter configuration
         speed = config.get("speed", "50")
         self.speed = int(speed) if speed else 50
 
@@ -96,7 +96,7 @@ class TTSProvider(TTSProviderBase):
         pitch = config.get("pitch", "50")
         self.pitch = int(pitch) if pitch else 50
 
-        # 应用百分比调整（如果存在），否则使用公有化配置
+        # Apply percentage adjustment (if exists), otherwise use public configuration
         self._apply_percentage_params(config)
 
         # 音频编码配置
@@ -114,7 +114,7 @@ class TTSProvider(TTSProviderBase):
         remain = config.get("remain", "0")
         self.remain = int(remain) if remain else 0
 
-        # WebSocket配置
+        # WebSocket configuration
         self.ws = None
         self._monitor_task = None
         self.activate_session = False
@@ -127,7 +127,7 @@ class TTSProvider(TTSProviderBase):
             raise ValueError("讯飞TTS需要配置app_id、api_key和api_secret")
 
     async def _ensure_connection(self):
-        """确保WebSocket连接可用"""
+        """Ensure WebSocket connection is available"""
         try:
             logger.bind(tag=TAG).debug("开始建立新连接...")
 
@@ -150,7 +150,7 @@ class TTSProvider(TTSProviderBase):
             raise
 
     def tts_text_priority_thread(self):
-        """流式文本处理线程"""
+        """Streaming text processing thread"""
         while not self.conn.stop_event.is_set():
             try:
                 message = self.tts_text_queue.get(timeout=1)
@@ -182,7 +182,7 @@ class TTSProvider(TTSProviderBase):
                             self.conn.sentence_id = uuid.uuid4().hex
                             logger.bind(tag=TAG).debug(f"自动生成新的 会话ID: {self.conn.sentence_id}")
 
-                        logger.bind(tag=TAG).debug("开始启动TTS会话...")
+                        logger.bind(tag=TAG).debug("Starting TTS session...")
                         future = asyncio.run_coroutine_threadsafe(
                             self.start_session(self.conn.sentence_id),
                             loop=self.conn.loop,
@@ -192,7 +192,7 @@ class TTSProvider(TTSProviderBase):
                         logger.bind(tag=TAG).debug("TTS会话启动成功")
 
                     except Exception as e:
-                        logger.bind(tag=TAG).error(f"启动TTS会话失败: {str(e)}")
+                        logger.bind(tag=TAG).error(f"Start TTS session失败: {str(e)}")
                         continue
 
                 # 处理文本内容
@@ -223,13 +223,13 @@ class TTSProvider(TTSProviderBase):
                 # 处理会话结束
                 if message.sentence_type == SentenceType.LAST:
                     try:
-                        logger.bind(tag=TAG).debug("开始结束TTS会话...")
+                        logger.bind(tag=TAG).debug("Ending TTS session...")
                         asyncio.run_coroutine_threadsafe(
                             self.finish_session(self.conn.sentence_id),
                             loop=self.conn.loop,
                         )
                     except Exception as e:
-                        logger.bind(tag=TAG).error(f"结束TTS会话失败: {str(e)}")
+                        logger.bind(tag=TAG).error(f"End TTS session失败: {str(e)}")
                         continue
 
             except queue.Empty:
@@ -240,7 +240,7 @@ class TTSProvider(TTSProviderBase):
                 )
 
     async def text_to_speak(self, text, _):
-        """发送文本到TTS服务进行合成"""
+        """Send text to TTS service for synthesis"""
         try:
             if self.ws is None:
                 logger.bind(tag=TAG).warning(f"WebSocket连接不存在，终止发送文本")
@@ -295,7 +295,7 @@ class TTSProvider(TTSProviderBase):
             logger.bind(tag=TAG).debug("会话启动请求已发送")
         except Exception as e:
             logger.bind(tag=TAG).error(f"启动会话失败: {str(e)}")
-            # 确保清理资源
+            # Ensure resources are cleaned up
             await self.close()
             raise
 
@@ -321,7 +321,7 @@ class TTSProvider(TTSProviderBase):
             raise
 
     async def close(self):
-        """资源清理"""
+        """Resource cleanup"""
         await super().close()
         self.activate_session = False
         if self._monitor_task:
@@ -425,7 +425,7 @@ class TTSProvider(TTSProviderBase):
             self._monitor_task = None
 
     def to_tts(self, text: str) -> list:
-        """非流式TTS处理，用于测试及保存音频文件的场景"""
+        """Non-streaming TTS processing for testing and saving audio file scenarios"""
         try:
             # 创建新的事件循环
             loop = asyncio.new_event_loop()
@@ -490,7 +490,7 @@ class TTSProvider(TTSProviderBase):
                             raise Exception(f"合成失败: {code} - {message}")
 
                 finally:
-                    # 清理资源
+                    # Clean up resources
                     try:
                         await ws.close()
                     except:
