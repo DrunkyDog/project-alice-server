@@ -711,3 +711,38 @@ databaseChangeLog:
         - sqlFile:
             encoding: utf8
             path: classpath:db/changelog/202607101200.sql
+  - changeSet:
+      id: 202607311200
+      author: DrunkyDog
+      changes:
+        - sqlFile:
+            encoding: utf8
+            path: classpath:db/changelog/202607311200.sql
+  - changeSet:
+      id: 202607311400
+      author: DrunkyDog
+      changes:
+        - sqlFile:
+            encoding: utf8
+            path: classpath:db/changelog/202607311400.sql
+  - changeSet:
+      id: 202607311600
+      author: DrunkyDog
+      changes:
+        - sqlFile:
+            encoding: utf8
+            path: classpath:db/changelog/202607311600.sql
+  - changeSet:
+      id: 202607311800
+      author: DrunkyDog
+      changes:
+        - sqlFile:
+            encoding: utf8
+            path: classpath:db/changelog/202607311800.sql
+  - changeSet:
+      id: 202607312000
+      author: DrunkyDog
+      changes:
+        - sqlFile:
+            encoding: utf8
+            path: classpath:db/changelog/202607312000.sql

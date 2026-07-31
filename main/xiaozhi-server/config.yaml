@@ -130,22 +130,29 @@ context_providers:
 
 # Plugin base configuration
 plugins:
-  # Weather plugin configuration, fill in your api_key here
-  # This key is shared across the project; heavy usage may result in rate limiting
-  # For stability, apply for your own key and replace it. Free tier: 1000 calls per day
-  # Application: https://console.qweather.com/#/apps/create-key/over
-  # After applying, find your apihost via: https://console.qweather.com/setting?lang=zh
+  # Live clock plugin, always loaded. IANA timezone name used to format the answer
+  # If the timezone database is unavailable, server.timezone_offset is used instead
+  get_current_time:
+    timezone: "Asia/Bangkok"
+  # Weather plugin configuration, three providers are tried in order:
+  #   1. OpenWeatherMap (owm_api_key) - 5-day forecast, apply at https://home.openweathermap.org/api_keys
+  #   2. WeatherAPI.com (api_key)     - 3-day forecast plus UV and PM2.5, apply at https://www.weatherapi.com/my/
+  #   3. Open-Meteo                   - 7-day forecast, no key required, used when both keys are missing or fail
+  # Leaving both keys empty still works; the plugin falls back to Open-Meteo
   get_weather:
-    api_host: "mj7p3y7naa.re.qweatherapi.com"
-    api_key: "a861d0d5e7bf4ee1a83d9a9e4f96d4da"
-    default_location: "Guangzhou"
-  # News plugin configuration, pass the corresponding url link based on the desired news type, supports society, technology, finance news by default
-  # For more news types, see: https://www.chinanews.com.cn/rss/
-  get_news_from_chinanews:
-    default_rss_url: "https://www.chinanews.com.cn/rss/society.xml"
-    society_rss_url: "https://www.chinanews.com.cn/rss/society.xml"
-    world_rss_url: "https://www.chinanews.com.cn/rss/world.xml"
-    finance_rss_url: "https://www.chinanews.com.cn/rss/finance.xml"
+    owm_api_key: ""
+    api_key: ""
+    default_location: "Bangkok"
+  # Thai news plugin, one RSS/Atom feed per category
+  # Every key is optional; the plugin falls back to the built-in feeds in DEFAULT_RSS
+  get_news_from_thai:
+    default_rss_url: "https://www.thairath.co.th/rss/news"
+    economy_rss_url: "https://www.matichon.co.th/economy/feed"
+    world_rss_url: "https://www.matichon.co.th/foreign/feed"
+    sport_rss_url: "https://www.thairath.co.th/rss/sport"
+    entertain_rss_url: "https://www.thairath.co.th/rss/entertain"
+    local_rss_url: "https://www.matichon.co.th/local/feed"
+    tech_rss_url: "https://www.blognone.com/atom.xml"
   get_news_from_newsnow:
     url: "https://newsnow.busiyi.world/api/s?id="
     news_sources: "The Paper;Baidu Hot Search;Cailian Press"
@@ -172,18 +179,25 @@ plugins:
     # ragflow knowledge base id
     dataset_ids: ["123456789"]
   # Web search plugin configuration
-  # Supports Metaso and Tavily as search sources
-  # Metaso API Key application: https://metaso.cn/search-api/api-keys
   # Tavily API Key application: https://app.tavily.com/home
+  # Brave Search API Key application: https://api-dashboard.search.brave.com/app/keys
   web_search:
-    # Search source: metaso / tavily
-    provider: "metaso"
+    # Search source: auto / tavily / brave
+    # auto tries Tavily first, then Brave, using whichever keys are filled in
+    provider: "auto"
     # Tool description, used to inform LLM when to call this tool, customizable as needed
-    description: "Web search tool. Use this tool when the user explicitly needs to search the internet for a question."
+    description: ""
+    # Tavily API Key (tvly- prefix)
+    api_key: ""
+    # Brave Search API Key
+    brave_api_key: ""
     # Number of results to return (default: 5)
     max_results: 5
-    # Metaso API Key (mk- prefix) / Tavily API Key (tvly- prefix)
-    api_key: "mk-xxx"
+    # Result language and country, used to bias results toward Thai pages
+    country: "TH"
+    lang: "th"
+    # Character budget for the snippets handed back to the LLM
+    max_chars: 1500
 # Voiceprint recognition configuration
 voiceprint:
   # Voiceprint interface address
@@ -268,7 +282,8 @@ Intent:
     functions:
       - web_search
       - get_weather
-      - get_news_from_newsnow
+      - get_news_from_thai
+      # - get_news_from_newsnow # Chinese news sources, enable only one news tool at a time
       - play_music
   function_call:
     # No need to change type
@@ -281,8 +296,8 @@ Intent:
       - web_search # Web search
       - get_weather
       # - search_from_ragflow
-      # - get_news_from_chinanews
-      - get_news_from_newsnow
+      - get_news_from_thai
+      # - get_news_from_newsnow # Chinese news sources, enable only one news tool at a time
       # play_music is the server's built-in music playback, hass_play_music is music playback through an independent external program controlled by Home Assistant
       # If using hass_play_music, do not enable play_music; keep only one of the two
       - play_music

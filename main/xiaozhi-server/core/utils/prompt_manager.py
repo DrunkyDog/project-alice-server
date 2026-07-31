@@ -184,7 +184,7 @@ class PromptManager:
             async def _call():
                 try:
                     result_holder.append(
-                        await get_weather(conn, location=location, lang="zh_CN")
+                        await get_weather(conn, location=location)
                     )
                 except Exception as e:
                     exception_holder.append(e)

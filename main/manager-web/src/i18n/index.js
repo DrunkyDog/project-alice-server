@@ -17,29 +17,12 @@ import ptBRLocale from 'element-ui/lib/locale/lang/pt-br'
 
 Vue.use(VueI18n);
 
-// 从本地存储获取语言设置，如果没有则使用浏览器语言或默认语言
+// 默认语言为英文；只有用户在界面上手动切换过语言时才使用其选择
+// （不再根据浏览器语言自动切换，避免中文浏览器打开变成中文界面）
+const DEFAULT_LANGUAGE = 'en';
+
 const getDefaultLanguage = () => {
-  const savedLang = localStorage.getItem('userLanguage');
-  if (savedLang) {
-    return savedLang;
-  }
-  const browserLang = navigator.language || navigator.userLanguage;
-  if (browserLang.indexOf('zh') === 0) {
-    if (browserLang === 'zh-TW' || browserLang === 'zh-HK' || browserLang === 'zh-MO') {
-      return 'zh_TW';
-    }
-    return 'zh_CN';
-  }
-  if (browserLang.indexOf('de') === 0) {
-    return 'de';
-  }
-  if (browserLang.indexOf('vi') === 0) {
-    return 'vi';
-  }
-  if (browserLang === 'pt-BR' || browserLang === 'pt') {
-    return 'pt_BR';
-  }
-  return 'en';
+  return localStorage.getItem('userLanguage') || DEFAULT_LANGUAGE;
 };
 
 const i18n = new VueI18n({
