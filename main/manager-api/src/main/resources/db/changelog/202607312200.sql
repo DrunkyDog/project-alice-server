@@ -4,6 +4,11 @@
 -- Register the MiniMax global (api.minimax.io) TTS provider so it can be configured
 -- from the console like every other model. Unlike the built-in minimax_httpstream it
 -- needs no group_id, and it returns a full MP3 that the base class converts to Opus.
+--
+-- The console pairs a model with its provider by config_json.type -> provider_code,
+-- so the provider row alone is what makes an existing minimax_io model editable.
+-- The seed model and voice list are therefore only created when the deployment has
+-- no minimax_io model yet, leaving a hand-made one (and the agents using it) alone.
 
 DELETE FROM `ai_model_provider` WHERE id = 'SYSTEM_TTS_MinimaxIOTTS';
 INSERT INTO `ai_model_provider`
@@ -26,30 +31,43 @@ VALUES
        {"key":"output_dir","label":"Output directory","type":"string"}]',
      19, 1, NOW(), 1, NOW());
 
-DELETE FROM `ai_model_config` WHERE id = 'TTS_MinimaxIOTTS';
+-- Seed model, only when no minimax_io model exists yet
 INSERT INTO `ai_model_config`
     (`id`, `model_type`, `model_code`, `model_name`, `is_default`, `is_enabled`, `config_json`,
      `doc_link`, `remark`, `sort`, `creator`, `create_date`, `updater`, `update_date`)
-VALUES
-    ('TTS_MinimaxIOTTS', 'TTS', 'MinimaxIOTTS', 'MiniMax Global TTS', 0, 1,
-     '{"type": "minimax_io", "api_key": "", "voice_id": "", "model": "speech-2.8-hd", "language_boost": "Thai", "emotion": "happy", "speed": "1.0", "vol": "1.0", "pitch": "0", "sample_rate": "32000", "format": "mp3", "laugh_555": "true", "sound_effects": "", "host": "api.minimax.io", "output_dir": "tmp/"}',
-     'https://www.minimax.io/platform',
-     'MiniMax T2A v2 on the global endpoint. Notes:
-1. Get an API key from https://www.minimax.io/platform — the global host needs no group_id.
+SELECT 'TTS_MinimaxIOTTS', 'TTS', 'MinimaxIOTTS', 'MiniMax Global TTS', 0, 1,
+       '{"type": "minimax_io", "api_key": "", "voice_id": "", "model": "speech-2.8-hd", "language_boost": "Thai", "emotion": "happy", "speed": "1.0", "vol": "1.0", "pitch": "0", "sample_rate": "32000", "format": "mp3", "laugh_555": "true", "sound_effects": "", "host": "api.minimax.io", "output_dir": "tmp/"}',
+       NULL, NULL, 22, 1, NOW(), 1, NOW()
+FROM DUAL
+WHERE NOT EXISTS (
+    SELECT 1 FROM (SELECT * FROM `ai_model_config`) AS existing
+    WHERE existing.model_type = 'TTS'
+      AND JSON_UNQUOTE(JSON_EXTRACT(existing.config_json, '$.type')) = 'minimax_io'
+);
+
+-- Documentation applies to every minimax_io model, hand-made ones included
+UPDATE `ai_model_config`
+SET doc_link = 'https://www.minimax.io/platform',
+    remark = 'MiniMax T2A v2 on the global endpoint. Notes:
+1. Get an API key from https://www.minimax.io/platform - the global host needs no group_id.
 2. language_boost = Thai is what makes Thai pronunciation correct; change it for other languages.
 3. voice_id accepts system voices and cloned voices (moss_audio_...). A voice picked on the agent overrides it.
 4. laugh_555 rewrites Thai chat-laughter "555" into laughter tags instead of reading it as a number. It needs a speech-2.8 model (2.8-hd / 2.8-turbo); set it to false on older models.
-5. Non-streaming: it returns a full MP3 that the server converts to Opus, which plays reliably on the device. Use the streaming provider only if latency matters more than reliability.',
-     22, 1, NOW(), 1, NOW());
+5. Non-streaming: it returns a full MP3 that the server converts to Opus, which plays reliably on the device. Use the streaming provider only if latency matters more than reliability.'
+WHERE model_type = 'TTS'
+  AND JSON_UNQUOTE(JSON_EXTRACT(config_json, '$.type')) = 'minimax_io';
 
--- Reuse the voice list already seeded for the streaming MiniMax model: same platform,
--- same system voice ids. Cloned voices are entered directly in voice_id instead.
-DELETE FROM `ai_tts_voice` WHERE tts_model_id = 'TTS_MinimaxIOTTS';
+-- Voice list for the seed model only: same platform as the streaming MiniMax model,
+-- so the system voice ids can be reused. Cloned voices go straight into voice_id.
 INSERT INTO `ai_tts_voice`
     (`id`, `tts_model_id`, `name`, `tts_voice`, `languages`, `voice_demo`, `remark`, `sort`,
      `creator`, `create_date`, `updater`, `update_date`)
-SELECT REPLACE(`id`, 'TTS_MinimaxStreamTTS', 'TTS_MinimaxIOTTS'),
-       'TTS_MinimaxIOTTS', `name`, `tts_voice`, `languages`, `voice_demo`, `remark`, `sort`,
-       1, NOW(), 1, NOW()
-FROM `ai_tts_voice`
-WHERE tts_model_id = 'TTS_MinimaxStreamTTS';
+SELECT REPLACE(src.`id`, 'TTS_MinimaxStreamTTS', 'TTS_MinimaxIOTTS'),
+       'TTS_MinimaxIOTTS', src.`name`, src.`tts_voice`, src.`languages`, src.`voice_demo`,
+       src.`remark`, src.`sort`, 1, NOW(), 1, NOW()
+FROM (SELECT * FROM `ai_tts_voice` WHERE tts_model_id = 'TTS_MinimaxStreamTTS') AS src
+WHERE EXISTS (SELECT 1 FROM `ai_model_config` WHERE id = 'TTS_MinimaxIOTTS')
+  AND NOT EXISTS (
+      SELECT 1 FROM (SELECT * FROM `ai_tts_voice`) AS mine
+      WHERE mine.tts_model_id = 'TTS_MinimaxIOTTS'
+  );
